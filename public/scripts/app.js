@@ -42,7 +42,7 @@ var Main = function (_React$Component) {
     _createClass(Main, [{
         key: 'getCities',
         value: function getCities() {
-            fetch('cities.json').then(function (results) {
+            fetch('cities2.json').then(function (results) {
                 return results.json();
             }).then(function (data) {
                 return console.log(data);

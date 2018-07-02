@@ -1047,7 +1047,7 @@ var Main = function (_React$Component) {
     _createClass(Main, [{
         key: 'getCities',
         value: function getCities() {
-            fetch('cities.json').then(function (results) {
+            fetch('cities2.json').then(function (results) {
                 return results.json();
             }).then(function (data) {
                 return console.log(data);
@@ -21304,6 +21304,7 @@ var Search = function (_React$Component) {
         value: function handleSearch(e) {
             e.preventDefault();
             var city = e.target.elements.city.value.trim();
+            e.target.elements.city.value = '';
             if (city) {
                 this.props.handleSearch(city);
             }

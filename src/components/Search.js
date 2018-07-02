@@ -9,6 +9,7 @@ export default class Search extends React.Component {
     handleSearch(e) {
         e.preventDefault();
         const city = e.target.elements.city.value.trim();
+        e.target.elements.city.value = '';
         if(city){
             this.props.handleSearch(city);
         }

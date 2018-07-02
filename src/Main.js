@@ -14,7 +14,7 @@ class Main extends React.Component {
     }
 
     getCities() {
-        fetch('cities.json')
+        fetch('cities2.json')
         .then(results => results.json())
         .then(data => console.log(data))
     }
