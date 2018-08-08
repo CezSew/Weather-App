@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SearchInput from './SearchInput';
 
 export default class Search extends React.Component {
     constructor(props){
@@ -20,7 +21,7 @@ export default class Search extends React.Component {
         <div>
             <br /><br />
             <form onSubmit={this.handleSearch}>
-                <input type="text" name="city" placeholder="Type in a city"/>
+                <SearchInput />
                 <button>Add Option</button>
             </form>
         </div>

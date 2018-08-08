@@ -34,7 +34,8 @@ var Main = function (_React$Component) {
 
         _this.handleSearch = _this.handleSearch.bind(_this);
         _this.state = {
-            weather: ''
+            weather: '',
+            data: null
         };
         return _this;
     }
@@ -42,16 +43,20 @@ var Main = function (_React$Component) {
     _createClass(Main, [{
         key: 'getCities',
         value: function getCities() {
+            var _this2 = this;
+
             fetch('cities2.json').then(function (results) {
                 return results.json();
             }).then(function (data) {
-                return console.log(data);
+                console.log(data);
+                _this2.setState({ data: data });
+                console.log(_this2.state);
             });
         }
     }, {
         key: 'handleSearch',
         value: function handleSearch(city) {
-            var _this2 = this;
+            var _this3 = this;
 
             var temperatureInKelvins = void 0;
             var temperatureInCelsius = 0;
@@ -64,7 +69,7 @@ var Main = function (_React$Component) {
             }).then(function () {
                 temperatureInKelvins = APICallbackObject.list[0].main.temp;
                 temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
-                _this2.setState({ weather: temperatureInCelsius });
+                _this3.setState({ weather: temperatureInCelsius });
             });
         }
     }, {

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Search from './components/Search';
 
+
 const rootDir = document.getElementById('app');
 
 class Main extends React.Component {
@@ -9,14 +10,21 @@ class Main extends React.Component {
         super(props);
         this.handleSearch = this.handleSearch.bind(this);
         this.state = {
-            weather: ''
+            weather: '',
+            data: null
         };
     }
 
     getCities() {
         fetch('cities2.json')
         .then(results => results.json())
-        .then(data => console.log(data))
+        .then(data => {
+                console.log(data);
+                this.setState({ data });
+                console.log(this.state);
+            }
+        );
+        
     }
     handleSearch(city) {
         let temperatureInKelvins;

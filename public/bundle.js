@@ -1039,7 +1039,8 @@ var Main = function (_React$Component) {
 
         _this.handleSearch = _this.handleSearch.bind(_this);
         _this.state = {
-            weather: ''
+            weather: '',
+            data: null
         };
         return _this;
     }
@@ -1047,16 +1048,20 @@ var Main = function (_React$Component) {
     _createClass(Main, [{
         key: 'getCities',
         value: function getCities() {
+            var _this2 = this;
+
             fetch('cities2.json').then(function (results) {
                 return results.json();
             }).then(function (data) {
-                return console.log(data);
+                console.log(data);
+                _this2.setState({ data: data });
+                console.log(_this2.state);
             });
         }
     }, {
         key: 'handleSearch',
         value: function handleSearch(city) {
-            var _this2 = this;
+            var _this3 = this;
 
             var temperatureInKelvins = void 0;
             var temperatureInCelsius = 0;
@@ -1069,7 +1074,7 @@ var Main = function (_React$Component) {
             }).then(function () {
                 temperatureInKelvins = APICallbackObject.list[0].main.temp;
                 temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
-                _this2.setState({ weather: temperatureInCelsius });
+                _this3.setState({ weather: temperatureInCelsius });
             });
         }
     }, {
@@ -21279,6 +21284,10 @@ var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _SearchInput = __webpack_require__(33);
+
+var _SearchInput2 = _interopRequireDefault(_SearchInput);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21320,7 +21329,7 @@ var Search = function (_React$Component) {
                 _react2.default.createElement(
                     'form',
                     { onSubmit: this.handleSearch },
-                    _react2.default.createElement('input', { type: 'text', name: 'city', placeholder: 'Type in a city' }),
+                    _react2.default.createElement(_SearchInput2.default, null),
                     _react2.default.createElement(
                         'button',
                         null,
@@ -21335,6 +21344,77 @@ var Search = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Search;
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(10);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SearchInput = function (_React$Component) {
+    _inherits(SearchInput, _React$Component);
+
+    function SearchInput(props) {
+        _classCallCheck(this, SearchInput);
+
+        var _this = _possibleConstructorReturn(this, (SearchInput.__proto__ || Object.getPrototypeOf(SearchInput)).call(this, props));
+
+        _this.handleKeyUp = _this.handleKeyUp.bind(_this);
+        _this.showList = _this.showList.bind(_this);
+        return _this;
+    }
+
+    _createClass(SearchInput, [{
+        key: 'handleKeyUp',
+        value: function handleKeyUp(e) {
+            this.showList(e);
+        }
+    }, {
+        key: 'showList',
+        value: function showList(e) {
+            var searchFieldValue = e.target.value;
+            console.log(this.state);
+            // const expression = new RegExp(searchField, "i");
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement('input', { onKeyUp: this.handleKeyUp, type: 'text', name: 'city', placeholder: 'Miasto' }),
+                _react2.default.createElement('ul', null)
+            );
+        }
+    }]);
+
+    return SearchInput;
+}(_react2.default.Component);
+
+exports.default = SearchInput;
 
 /***/ })
 /******/ ]);
