@@ -1040,7 +1040,8 @@ var Main = function (_React$Component) {
         _this.handleSearch = _this.handleSearch.bind(_this);
         _this.state = {
             weather: '',
-            data: null
+            data: null,
+            ready: false
         };
         return _this;
     }
@@ -1054,6 +1055,8 @@ var Main = function (_React$Component) {
                 return results.json();
             }).then(function (data) {
                 _this2.setState({ data: data });
+                _this2.setState({ ready: true });
+                console.log("data fetched!");
             });
         }
     }, {
@@ -1081,8 +1084,15 @@ var Main = function (_React$Component) {
             this.getCities();
         }
     }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log(this.state.data);
+        }
+    }, {
         key: 'render',
         value: function render() {
+
+            if (!this.state.ready) return null;
             return _react2.default.createElement(
                 'div',
                 null,
@@ -21401,11 +21411,13 @@ var SearchInput = function (_React$Component) {
             var expression = searchFieldValue;
             var counter = 0;
             var recommendedList = [];
+
             if (searchFieldValue.length > 2) {
                 listOfCities.forEach(function (key) {
+                    if (key.startsWith(expression)) {
 
-                    if (key.startsWith(expression) != false) {
                         if (!(counter > 5)) {
+                            console.log("tested " + key + " and " + expression);
                             counter++;
                             recommendedList.push(key);
                         }
@@ -21420,7 +21432,7 @@ var SearchInput = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement('input', { onKeyUp: this.handleKeyUp, type: 'text', name: 'city', placeholder: 'Miasto', autocomplete: 'off' }),
+                _react2.default.createElement('input', { onKeyUp: this.handleKeyUp, type: 'text', name: 'city', placeholder: 'Miasto', autoComplete: 'off' }),
                 _react2.default.createElement(
                     'ul',
                     { className: 'input__recommended-list' },

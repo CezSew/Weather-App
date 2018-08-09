@@ -17,14 +17,16 @@ export default class SearchInput extends React.Component {
     showList(e) {
         const searchFieldValue = e.target.value;
         const listOfCities = this.props.listOfCities;
-        const expression = searchFieldValue;
+        let expression = searchFieldValue;
         let counter = 0;
         let recommendedList = [];
+        
         if(searchFieldValue.length > 2) {
             listOfCities.forEach(function(key){
-            
-                if (key.startsWith(expression) != false) {
+                if (key.startsWith(expression)) { 
+
                     if(!(counter>5)) {
+                        console.log("tested "+ key + " and " + expression);
                         counter++;
                         recommendedList.push(key);
                     } 
@@ -38,7 +40,7 @@ export default class SearchInput extends React.Component {
             <div>
                 <input onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
                 <ul className="input__recommended-list">
-                {this.state.cities}
+                    {this.state.cities}
                 </ul>  
             </div>
         );

@@ -11,7 +11,8 @@ class Main extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.state = {
             weather: '',
-            data: null
+            data: null,
+            ready: false,
         };
     }
 
@@ -20,6 +21,8 @@ class Main extends React.Component {
         .then(results => results.json())
         .then(data => {
                 this.setState({ data });
+                this.setState({ ready: true });
+                console.log("data fetched!");
             }
         );
         
@@ -41,8 +44,14 @@ class Main extends React.Component {
     componentWillMount() {
         this.getCities();
     }
+    componentDidMount(){
+        console.log(this.state.data);
+    }
 
     render() {
+
+        if(!this.state.ready)
+        return null; 
         return (
             <div>
                 <p>Test</p>

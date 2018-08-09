@@ -35,7 +35,8 @@ var Main = function (_React$Component) {
         _this.handleSearch = _this.handleSearch.bind(_this);
         _this.state = {
             weather: '',
-            data: null
+            data: null,
+            ready: false
         };
         return _this;
     }
@@ -49,6 +50,8 @@ var Main = function (_React$Component) {
                 return results.json();
             }).then(function (data) {
                 _this2.setState({ data: data });
+                _this2.setState({ ready: true });
+                console.log("data fetched!");
             });
         }
     }, {
@@ -76,8 +79,15 @@ var Main = function (_React$Component) {
             this.getCities();
         }
     }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log(this.state.data);
+        }
+    }, {
         key: 'render',
         value: function render() {
+
+            if (!this.state.ready) return null;
             return _react2.default.createElement(
                 'div',
                 null,
