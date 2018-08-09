@@ -19,9 +19,7 @@ class Main extends React.Component {
         fetch('cities2.json')
         .then(results => results.json())
         .then(data => {
-                console.log(data);
                 this.setState({ data });
-                console.log(this.state);
             }
         );
         
@@ -40,7 +38,7 @@ class Main extends React.Component {
             this.setState({weather: temperatureInCelsius})
         })  
     }
-    componentDidMount() {
+    componentWillMount() {
         this.getCities();
     }
 
@@ -49,7 +47,7 @@ class Main extends React.Component {
             <div>
                 <p>Test</p>
                 {this.state.weather}<sup>o</sup>C
-                <Search handleSearch={this.handleSearch}/>
+                <Search handleSearch={this.handleSearch} listOfCities={this.state.data}/>
             </div>
         );
     }

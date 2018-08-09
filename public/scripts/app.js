@@ -48,9 +48,7 @@ var Main = function (_React$Component) {
             fetch('cities2.json').then(function (results) {
                 return results.json();
             }).then(function (data) {
-                console.log(data);
                 _this2.setState({ data: data });
-                console.log(_this2.state);
             });
         }
     }, {
@@ -73,8 +71,8 @@ var Main = function (_React$Component) {
             });
         }
     }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
+        key: 'componentWillMount',
+        value: function componentWillMount() {
             this.getCities();
         }
     }, {
@@ -95,7 +93,7 @@ var Main = function (_React$Component) {
                     'o'
                 ),
                 'C',
-                _react2.default.createElement(_Search2.default, { handleSearch: this.handleSearch })
+                _react2.default.createElement(_Search2.default, { handleSearch: this.handleSearch, listOfCities: this.state.data })
             );
         }
     }]);
