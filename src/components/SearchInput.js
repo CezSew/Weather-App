@@ -14,28 +14,32 @@ export default class SearchInput extends React.Component {
         this.showList(e);
     }
  
+
+
     showList(e) {
         const searchFieldValue = e.target.value;
         const listOfCities = this.props.listOfCities;
-        let expression = searchFieldValue;
+        const expression = new RegExp(searchFieldValue, "i");
         let counter = 0;
         let recommendedList = [];
-        
-        if(searchFieldValue.length > 2) {
-            listOfCities.forEach(function(key){
-                if (key.startsWith(expression)) { 
 
+        if(searchFieldValue.length > 1) {
+            listOfCities.forEach(function(key){
+                if (key.search(expression) != -1) { 
                     if(!(counter>5)) {
                         console.log("tested "+ key + " and " + expression);
                         counter++;
                         recommendedList.push(key);
                     } 
                 }
+                
             });
-        }
-        this.setState({cities: recommendedList});
+         }
+         this.setState({cities: recommendedList});
+        
     }
     render() {
+
         return (
             <div>
                 <input onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 

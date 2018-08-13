@@ -21408,14 +21408,13 @@ var SearchInput = function (_React$Component) {
         value: function showList(e) {
             var searchFieldValue = e.target.value;
             var listOfCities = this.props.listOfCities;
-            var expression = searchFieldValue;
+            var expression = new RegExp(searchFieldValue, "i");
             var counter = 0;
             var recommendedList = [];
 
-            if (searchFieldValue.length > 2) {
+            if (searchFieldValue.length > 1) {
                 listOfCities.forEach(function (key) {
-                    if (key.startsWith(expression)) {
-
+                    if (key.search(expression) != -1) {
                         if (!(counter > 5)) {
                             console.log("tested " + key + " and " + expression);
                             counter++;
@@ -21429,6 +21428,7 @@ var SearchInput = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+
             return _react2.default.createElement(
                 'div',
                 null,

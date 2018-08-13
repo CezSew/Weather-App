@@ -24,9 +24,9 @@ class Main extends React.Component {
                 this.setState({ ready: true });
                 console.log("data fetched!");
             }
-        );
-        
+        );  
     }
+
     handleSearch(city) {
         let temperatureInKelvins;
         let temperatureInCelsius = 0;
@@ -41,9 +41,11 @@ class Main extends React.Component {
             this.setState({weather: temperatureInCelsius})
         })  
     }
+
     componentWillMount() {
         this.getCities();
     }
+    
     componentDidMount(){
         console.log(this.state.data);
     }
