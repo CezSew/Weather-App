@@ -14,8 +14,6 @@ export default class SearchInput extends React.Component {
         this.showList(e);
     }
  
-
-
     showList(e) {
         const searchFieldValue = e.target.value;
         const listOfCities = this.props.listOfCities;
