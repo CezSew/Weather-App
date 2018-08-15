@@ -21406,8 +21406,8 @@ var SearchInput = function (_React$Component) {
         }
     }, {
         key: 'handleSelectOption',
-        value: function handleSelectOption(e) {
-            console.log(e);
+        value: function handleSelectOption(e, id) {
+            console.log(this.state.cities[id]);
         }
     }, {
         key: 'showList',
@@ -21446,7 +21446,9 @@ var SearchInput = function (_React$Component) {
                     cities.map(function (city, index) {
                         return _react2.default.createElement(
                             'li',
-                            { key: index, onClick: _this2.handleSelectOption },
+                            { value: city, key: index, onClick: function onClick(e) {
+                                    return _this2.handleSelectOption(e, index);
+                                } },
                             city
                         );
                     })

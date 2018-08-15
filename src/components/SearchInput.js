@@ -15,8 +15,8 @@ export default class SearchInput extends React.Component {
         this.showList(e);
     }
     
-    handleSelectOption(e) {
-        console.log(e);
+    handleSelectOption(e, id) {
+        console.log(this.state.cities[id]);
     }
     showList(e) {
         const searchFieldValue = e.target.value;
@@ -46,7 +46,7 @@ export default class SearchInput extends React.Component {
                 <input onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
                 <ul className="input__recommended-list">
                     {cities.map((city, index)=>{
-                        return <li key={index} onClick={this.handleSelectOption}>{city}</li>;
+                        return <li value={city} key={index} onClick={((e) => this.handleSelectOption(e, index))}>{city}</li>;
                     })}
                 </ul>  
             </div>
