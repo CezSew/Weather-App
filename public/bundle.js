@@ -21392,6 +21392,7 @@ var SearchInput = function (_React$Component) {
 
         _this.handleKeyUp = _this.handleKeyUp.bind(_this);
         _this.showList = _this.showList.bind(_this);
+        _this.handleSelectOption = _this.handleSelectOption.bind(_this);
         _this.state = {
             cities: []
         };
@@ -21402,6 +21403,11 @@ var SearchInput = function (_React$Component) {
         key: 'handleKeyUp',
         value: function handleKeyUp(e) {
             this.showList(e);
+        }
+    }, {
+        key: 'handleSelectOption',
+        value: function handleSelectOption(e) {
+            console.log(e);
         }
     }, {
         key: 'showList',
@@ -21416,7 +21422,6 @@ var SearchInput = function (_React$Component) {
                 listOfCities.forEach(function (key) {
                     if (key.search(expression) != -1) {
                         if (!(counter > 5)) {
-                            console.log("tested " + key + " and " + expression);
                             counter++;
                             recommendedList.push(key);
                         }
@@ -21428,7 +21433,9 @@ var SearchInput = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
 
+            var cities = this.state.cities;
             return _react2.default.createElement(
                 'div',
                 null,
@@ -21436,7 +21443,13 @@ var SearchInput = function (_React$Component) {
                 _react2.default.createElement(
                     'ul',
                     { className: 'input__recommended-list' },
-                    this.state.cities
+                    cities.map(function (city, index) {
+                        return _react2.default.createElement(
+                            'li',
+                            { key: index, onClick: _this2.handleSelectOption },
+                            city
+                        );
+                    })
                 )
             );
         }
