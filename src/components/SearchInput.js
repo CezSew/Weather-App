@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Droplist from './Droplist';
 
 export default class SearchInput extends React.Component { 
     constructor(props) {
         super(props);
        this.handleKeyUp = this.handleKeyUp.bind(this);
        this.showList = this.showList.bind(this);
-       this.handleSelectOption = this.handleSelectOption.bind(this);
+
        this.state = {
            cities: [],
        }
@@ -15,9 +16,7 @@ export default class SearchInput extends React.Component {
         this.showList(e);
     }
     
-    handleSelectOption(e, id) {
-        console.log(this.state.cities[id]);
-    }
+
     showList(e) {
         const searchFieldValue = e.target.value;
         const listOfCities = this.props.listOfCities;
@@ -44,11 +43,7 @@ export default class SearchInput extends React.Component {
         return (
             <div>
                 <input onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
-                <ul className="input__recommended-list">
-                    {cities.map((city, index)=>{
-                        return <li value={city} key={index} onClick={((e) => this.handleSelectOption(e, index))}>{city}</li>;
-                    })}
-                </ul>  
+                <Droplist cities={cities}/> 
             </div>
         );
     }

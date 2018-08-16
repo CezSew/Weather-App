@@ -21374,6 +21374,10 @@ var _reactDom = __webpack_require__(9);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _Droplist = __webpack_require__(34);
+
+var _Droplist2 = _interopRequireDefault(_Droplist);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21392,7 +21396,7 @@ var SearchInput = function (_React$Component) {
 
         _this.handleKeyUp = _this.handleKeyUp.bind(_this);
         _this.showList = _this.showList.bind(_this);
-        _this.handleSelectOption = _this.handleSelectOption.bind(_this);
+
         _this.state = {
             cities: []
         };
@@ -21403,11 +21407,6 @@ var SearchInput = function (_React$Component) {
         key: 'handleKeyUp',
         value: function handleKeyUp(e) {
             this.showList(e);
-        }
-    }, {
-        key: 'handleSelectOption',
-        value: function handleSelectOption(e, id) {
-            console.log(this.state.cities[id]);
         }
     }, {
         key: 'showList',
@@ -21433,26 +21432,12 @@ var SearchInput = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
             var cities = this.state.cities;
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement('input', { onKeyUp: this.handleKeyUp, type: 'text', name: 'city', placeholder: 'Miasto', autoComplete: 'off' }),
-                _react2.default.createElement(
-                    'ul',
-                    { className: 'input__recommended-list' },
-                    cities.map(function (city, index) {
-                        return _react2.default.createElement(
-                            'li',
-                            { value: city, key: index, onClick: function onClick(e) {
-                                    return _this2.handleSelectOption(e, index);
-                                } },
-                            city
-                        );
-                    })
-                )
+                _react2.default.createElement(_Droplist2.default, { cities: cities })
             );
         }
     }]);
@@ -21461,6 +21446,79 @@ var SearchInput = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = SearchInput;
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(9);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Droplist = function (_React$Component) {
+    _inherits(Droplist, _React$Component);
+
+    function Droplist(props) {
+        _classCallCheck(this, Droplist);
+
+        var _this = _possibleConstructorReturn(this, (Droplist.__proto__ || Object.getPrototypeOf(Droplist)).call(this, props));
+
+        _this.handleSelectOption = _this.handleSelectOption.bind(_this);
+        return _this;
+    }
+
+    _createClass(Droplist, [{
+        key: 'handleSelectOption',
+        value: function handleSelectOption(e, id) {
+            console.log(this.props.cities[id]);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var cities = this.props.cities;
+            return _react2.default.createElement(
+                'ul',
+                { className: 'input__recommended-list' },
+                cities.map(function (city, index) {
+                    return _react2.default.createElement(
+                        'li',
+                        { value: city, key: index, onClick: function onClick(e) {
+                                return _this2.handleSelectOption(e, index);
+                            } },
+                        city
+                    );
+                })
+            );
+        }
+    }]);
+
+    return Droplist;
+}(_react2.default.Component);
+
+exports.default = Droplist;
 
 /***/ })
 /******/ ]);
