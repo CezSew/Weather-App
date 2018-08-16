@@ -9,6 +9,7 @@ class Main extends React.Component {
     constructor(props){
         super(props);
         this.handleSearch = this.handleSearch.bind(this);
+        this.test = this.test.bind(this);
         this.state = {
             weather: '',
             data: null,
@@ -26,7 +27,9 @@ class Main extends React.Component {
             }
         );  
     }
-
+    test() {
+        console.log("Oh!");
+    }
     handleSearch(city) {
         let temperatureInKelvins;
         let temperatureInCelsius = 0;
@@ -58,7 +61,7 @@ class Main extends React.Component {
             <div>
                 <p>Test</p>
                 {this.state.weather}<sup>o</sup>C
-                <Search handleSearch={this.handleSearch} listOfCities={this.state.data}/>
+                <Search handleSearch={this.handleSearch} listOfCities={this.state.data} testFunction={this.test}/>
             </div>
         );
     }

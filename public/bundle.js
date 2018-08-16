@@ -1038,6 +1038,7 @@ var Main = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
         _this.handleSearch = _this.handleSearch.bind(_this);
+        _this.test = _this.test.bind(_this);
         _this.state = {
             weather: '',
             data: null,
@@ -1058,6 +1059,11 @@ var Main = function (_React$Component) {
                 _this2.setState({ ready: true });
                 console.log("data fetched!");
             });
+        }
+    }, {
+        key: 'test',
+        value: function test() {
+            console.log("Oh!");
         }
     }, {
         key: 'handleSearch',
@@ -1108,7 +1114,7 @@ var Main = function (_React$Component) {
                     'o'
                 ),
                 'C',
-                _react2.default.createElement(_Search2.default, { handleSearch: this.handleSearch, listOfCities: this.state.data })
+                _react2.default.createElement(_Search2.default, { handleSearch: this.handleSearch, listOfCities: this.state.data, testFunction: this.test })
             );
         }
     }]);
@@ -21337,7 +21343,7 @@ var Search = function (_React$Component) {
                 _react2.default.createElement(
                     'form',
                     { onSubmit: this.handleSearch },
-                    _react2.default.createElement(_SearchInput2.default, { listOfCities: this.props.listOfCities }),
+                    _react2.default.createElement(_SearchInput2.default, { listOfCities: this.props.listOfCities, testFunction: this.props.testFunction }),
                     _react2.default.createElement(
                         'button',
                         null,
@@ -21437,7 +21443,7 @@ var SearchInput = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement('input', { onKeyUp: this.handleKeyUp, type: 'text', name: 'city', placeholder: 'Miasto', autoComplete: 'off' }),
-                _react2.default.createElement(_Droplist2.default, { cities: cities })
+                _react2.default.createElement(_Droplist2.default, { cities: cities, testFunction: this.props.testFunction })
             );
         }
     }]);
@@ -21492,6 +21498,7 @@ var Droplist = function (_React$Component) {
         key: 'handleSelectOption',
         value: function handleSelectOption(e, id) {
             console.log(this.props.cities[id]);
+            console.log(this.props.testFunction());
         }
     }, {
         key: 'render',

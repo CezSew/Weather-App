@@ -33,6 +33,7 @@ var Main = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
         _this.handleSearch = _this.handleSearch.bind(_this);
+        _this.test = _this.test.bind(_this);
         _this.state = {
             weather: '',
             data: null,
@@ -53,6 +54,11 @@ var Main = function (_React$Component) {
                 _this2.setState({ ready: true });
                 console.log("data fetched!");
             });
+        }
+    }, {
+        key: 'test',
+        value: function test() {
+            console.log("Oh!");
         }
     }, {
         key: 'handleSearch',
@@ -103,7 +109,7 @@ var Main = function (_React$Component) {
                     'o'
                 ),
                 'C',
-                _react2.default.createElement(_Search2.default, { handleSearch: this.handleSearch, listOfCities: this.state.data })
+                _react2.default.createElement(_Search2.default, { handleSearch: this.handleSearch, listOfCities: this.state.data, testFunction: this.test })
             );
         }
     }]);

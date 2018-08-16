@@ -43,7 +43,7 @@ export default class SearchInput extends React.Component {
         return (
             <div>
                 <input onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
-                <Droplist cities={cities}/> 
+                <Droplist cities={cities} testFunction={this.props.testFunction}/> 
             </div>
         );
     }

@@ -8,6 +8,7 @@ export default class Droplist extends React.Component {
     }
     handleSelectOption(e, id) {
         console.log(this.props.cities[id]);
+        console.log(this.props.testFunction());
     }
     render() { 
         let cities = this.props.cities;
