@@ -565,6 +565,52 @@ module.exports = warning;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+function checkDCE() {
+  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+  if (
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
+  ) {
+    return;
+  }
+  if (process.env.NODE_ENV !== 'production') {
+    // This branch is unreachable because this function is only called
+    // in production, but the condition is true only in development.
+    // Therefore if the branch is still here, dead code elimination wasn't
+    // properly applied.
+    // Don't change the message. React DevTools relies on it. Also make sure
+    // this message doesn't occur elsewhere in this function, or it will cause
+    // a false positive.
+    throw new Error('^_^');
+  }
+  try {
+    // Verify that the code above has been dead code eliminated (DCE'd).
+    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
+  } catch (err) {
+    // DevTools shouldn't crash React, no matter what.
+    // We should still report in case we break this code.
+    console.error(err);
+  }
+}
+
+if (process.env.NODE_ENV === 'production') {
+  // DCE check should happen before ReactDOM bundle executes so that
+  // DevTools can report bad minification during injection.
+  checkDCE();
+  module.exports = __webpack_require__(19);
+} else {
+  module.exports = __webpack_require__(22);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -577,7 +623,7 @@ module.exports = warning;
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(2);
   var warning = __webpack_require__(6);
-  var ReactPropTypesSecret = __webpack_require__(8);
+  var ReactPropTypesSecret = __webpack_require__(9);
   var loggedTypeFailures = {};
 }
 
@@ -628,7 +674,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -645,52 +691,6 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-function checkDCE() {
-  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
-  if (
-    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
-    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
-  ) {
-    return;
-  }
-  if (process.env.NODE_ENV !== 'production') {
-    // This branch is unreachable because this function is only called
-    // in production, but the condition is true only in development.
-    // Therefore if the branch is still here, dead code elimination wasn't
-    // properly applied.
-    // Don't change the message. React DevTools relies on it. Also make sure
-    // this message doesn't occur elsewhere in this function, or it will cause
-    // a false positive.
-    throw new Error('^_^');
-  }
-  try {
-    // Verify that the code above has been dead code eliminated (DCE'd).
-    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
-  } catch (err) {
-    // DevTools shouldn't crash React, no matter what.
-    // We should still report in case we break this code.
-    console.error(err);
-  }
-}
-
-if (process.env.NODE_ENV === 'production') {
-  // DCE check should happen before ReactDOM bundle executes so that
-  // DevTools can report bad minification during injection.
-  checkDCE();
-  module.exports = __webpack_require__(19);
-} else {
-  module.exports = __webpack_require__(22);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 10 */
@@ -1011,7 +1011,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(7);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -1020,6 +1020,8 @@ var _Search = __webpack_require__(32);
 var _Search2 = _interopRequireDefault(_Search);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1038,7 +1040,6 @@ var Main = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
         _this.handleSearch = _this.handleSearch.bind(_this);
-        _this.test = _this.test.bind(_this);
         _this.state = {
             weather: '',
             data: null,
@@ -1061,15 +1062,11 @@ var Main = function (_React$Component) {
             });
         }
     }, {
-        key: 'test',
-        value: function test() {
-            console.log("Oh!");
-        }
-    }, {
         key: 'handleSearch',
         value: function handleSearch(city) {
             var _this3 = this;
 
+            console.log("selected: " + city);
             var temperatureInKelvins = void 0;
             var temperatureInCelsius = 0;
             var APICallbackObject = void 0;
@@ -1114,7 +1111,7 @@ var Main = function (_React$Component) {
                     'o'
                 ),
                 'C',
-                _react2.default.createElement(_Search2.default, { handleSearch: this.handleSearch, listOfCities: this.state.data, testFunction: this.test })
+                _react2.default.createElement(_Search2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
             );
         }
     }]);
@@ -1180,7 +1177,7 @@ var require$$0 = __webpack_require__(6);
 var emptyObject = __webpack_require__(5);
 var invariant = __webpack_require__(2);
 var emptyFunction = __webpack_require__(1);
-var checkPropTypes = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(8);
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3212,7 +3209,7 @@ var camelizeStyleName = __webpack_require__(25);
 var performanceNow = __webpack_require__(27);
 var propTypes = __webpack_require__(29);
 var emptyObject = __webpack_require__(5);
-var checkPropTypes = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(8);
 var shallowEqual = __webpack_require__(12);
 var containsNode = __webpack_require__(13);
 var focusNode = __webpack_require__(14);
@@ -20681,8 +20678,8 @@ var invariant = __webpack_require__(2);
 var warning = __webpack_require__(6);
 var assign = __webpack_require__(4);
 
-var ReactPropTypesSecret = __webpack_require__(8);
-var checkPropTypes = __webpack_require__(7);
+var ReactPropTypesSecret = __webpack_require__(9);
+var checkPropTypes = __webpack_require__(8);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -21228,7 +21225,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 var emptyFunction = __webpack_require__(1);
 var invariant = __webpack_require__(2);
-var ReactPropTypesSecret = __webpack_require__(8);
+var ReactPropTypesSecret = __webpack_require__(9);
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -21294,7 +21291,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(7);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -21343,7 +21340,7 @@ var Search = function (_React$Component) {
                 _react2.default.createElement(
                     'form',
                     { onSubmit: this.handleSearch },
-                    _react2.default.createElement(_SearchInput2.default, { listOfCities: this.props.listOfCities, testFunction: this.props.testFunction }),
+                    _react2.default.createElement(_SearchInput2.default, { listOfCities: this.props.listOfCities, handleSearch: this.props.handleSearch }),
                     _react2.default.createElement(
                         'button',
                         null,
@@ -21376,7 +21373,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(7);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -21443,7 +21440,7 @@ var SearchInput = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement('input', { onKeyUp: this.handleKeyUp, type: 'text', name: 'city', placeholder: 'Miasto', autoComplete: 'off' }),
-                _react2.default.createElement(_Droplist2.default, { cities: cities, testFunction: this.props.testFunction })
+                _react2.default.createElement(_Droplist2.default, { cities: cities, handleSearch: this.props.handleSearch })
             );
         }
     }]);
@@ -21470,7 +21467,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(7);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -21488,19 +21485,10 @@ var Droplist = function (_React$Component) {
     function Droplist(props) {
         _classCallCheck(this, Droplist);
 
-        var _this = _possibleConstructorReturn(this, (Droplist.__proto__ || Object.getPrototypeOf(Droplist)).call(this, props));
-
-        _this.handleSelectOption = _this.handleSelectOption.bind(_this);
-        return _this;
+        return _possibleConstructorReturn(this, (Droplist.__proto__ || Object.getPrototypeOf(Droplist)).call(this, props));
     }
 
     _createClass(Droplist, [{
-        key: 'handleSelectOption',
-        value: function handleSelectOption(e, id) {
-            console.log(this.props.cities[id]);
-            console.log(this.props.testFunction());
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -21512,8 +21500,8 @@ var Droplist = function (_React$Component) {
                 cities.map(function (city, index) {
                     return _react2.default.createElement(
                         'li',
-                        { value: city, key: index, onClick: function onClick(e) {
-                                return _this2.handleSelectOption(e, index);
+                        { value: city, key: index, onClick: function onClick() {
+                                return _this2.props.handleSearch(city);
                             } },
                         city
                     );

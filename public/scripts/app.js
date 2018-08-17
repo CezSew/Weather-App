@@ -16,6 +16,8 @@ var _Search2 = _interopRequireDefault(_Search);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -33,7 +35,6 @@ var Main = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
         _this.handleSearch = _this.handleSearch.bind(_this);
-        _this.test = _this.test.bind(_this);
         _this.state = {
             weather: '',
             data: null,
@@ -56,15 +57,11 @@ var Main = function (_React$Component) {
             });
         }
     }, {
-        key: 'test',
-        value: function test() {
-            console.log("Oh!");
-        }
-    }, {
         key: 'handleSearch',
         value: function handleSearch(city) {
             var _this3 = this;
 
+            console.log("selected: " + city);
             var temperatureInKelvins = void 0;
             var temperatureInCelsius = 0;
             var APICallbackObject = void 0;
@@ -109,7 +106,7 @@ var Main = function (_React$Component) {
                     'o'
                 ),
                 'C',
-                _react2.default.createElement(_Search2.default, { handleSearch: this.handleSearch, listOfCities: this.state.data, testFunction: this.test })
+                _react2.default.createElement(_Search2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
             );
         }
     }]);
