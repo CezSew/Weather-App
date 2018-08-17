@@ -21399,7 +21399,8 @@ var SearchInput = function (_React$Component) {
 
         _this.handleKeyUp = _this.handleKeyUp.bind(_this);
         _this.showList = _this.showList.bind(_this);
-
+        _this.clearInput = _this.clearInput.bind(_this);
+        _this.clearList = _this.clearList.bind(_this);
         _this.state = {
             cities: []
         };
@@ -21410,6 +21411,19 @@ var SearchInput = function (_React$Component) {
         key: 'handleKeyUp',
         value: function handleKeyUp(e) {
             this.showList(e);
+        }
+    }, {
+        key: 'clearInput',
+        value: function clearInput() {
+            console.log("clear");
+            // do it by ref
+            document.getElementById("city-input").value = '';
+        }
+    }, {
+        key: 'clearList',
+        value: function clearList() {
+            // fix the clear!
+            this._list.value = '';
         }
     }, {
         key: 'showList',
@@ -21435,12 +21449,22 @@ var SearchInput = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var cities = this.state.cities;
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement('input', { onKeyUp: this.handleKeyUp, type: 'text', name: 'city', placeholder: 'Miasto', autoComplete: 'off' }),
-                _react2.default.createElement(_Droplist2.default, { cities: cities, handleSearch: this.props.handleSearch })
+                _react2.default.createElement('input', { id: 'city-input', onKeyUp: this.handleKeyUp, type: 'text', name: 'city', placeholder: 'Miasto', autoComplete: 'off' }),
+                _react2.default.createElement(_Droplist2.default, {
+                    ref: function ref(element) {
+                        return _this2._list = element;
+                    },
+                    cities: cities,
+                    handleSearch: this.props.handleSearch,
+                    clearInput: this.clearInput,
+                    clearList: this.clearList
+                })
             );
         }
     }]);
@@ -21485,10 +21509,20 @@ var Droplist = function (_React$Component) {
     function Droplist(props) {
         _classCallCheck(this, Droplist);
 
-        return _possibleConstructorReturn(this, (Droplist.__proto__ || Object.getPrototypeOf(Droplist)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Droplist.__proto__ || Object.getPrototypeOf(Droplist)).call(this, props));
+
+        _this.handleClick = _this.handleClick.bind(_this);
+        return _this;
     }
 
     _createClass(Droplist, [{
+        key: 'handleClick',
+        value: function handleClick(city) {
+            this.props.handleSearch(city);
+            this.props.clearInput();
+            this.props.clearList();
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -21496,12 +21530,15 @@ var Droplist = function (_React$Component) {
             var cities = this.props.cities;
             return _react2.default.createElement(
                 'ul',
-                { className: 'input__recommended-list' },
+                { className: 'input__recommended-list', id: 'cities-list' },
                 cities.map(function (city, index) {
                     return _react2.default.createElement(
                         'li',
-                        { value: city, key: index, onClick: function onClick() {
-                                return _this2.props.handleSearch(city);
+                        {
+                            value: city,
+                            key: index,
+                            onClick: function onClick() {
+                                _this2.handleClick(city);
                             } },
                         city
                     );

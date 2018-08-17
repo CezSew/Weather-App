@@ -5,18 +5,27 @@ import Droplist from './Droplist';
 export default class SearchInput extends React.Component { 
     constructor(props) {
         super(props);
-       this.handleKeyUp = this.handleKeyUp.bind(this);
-       this.showList = this.showList.bind(this);
-
-       this.state = {
-           cities: [],
-       }
+        this.handleKeyUp = this.handleKeyUp.bind(this);
+        this.showList = this.showList.bind(this);
+        this.clearInput = this.clearInput.bind(this);
+        this.clearList = this.clearList.bind(this);
+        this.state = {
+            cities: [],
+        }
     }
     handleKeyUp(e) {
         this.showList(e);
     }
     
-
+    clearInput() {
+        console.log("clear");
+        // do it by ref
+        document.getElementById("city-input").value = '';
+    }
+    clearList() {
+        // fix the clear!
+        this._list.value = '';
+    }
     showList(e) {
         const searchFieldValue = e.target.value;
         const listOfCities = this.props.listOfCities;
@@ -42,8 +51,14 @@ export default class SearchInput extends React.Component {
         let cities = this.state.cities;
         return (
             <div>
-                <input onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
-                <Droplist cities={cities} handleSearch={this.props.handleSearch}/> 
+                <input id="city-input" onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
+                <Droplist 
+                ref={(element) => this._list = element}
+                cities={cities} 
+                handleSearch={this.props.handleSearch}
+                clearInput={this.clearInput}
+                clearList={this.clearList}
+                /> 
             </div>
         );
     }
