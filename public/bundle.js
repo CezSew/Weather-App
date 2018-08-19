@@ -1058,7 +1058,6 @@ var Main = function (_React$Component) {
             }).then(function (data) {
                 _this2.setState({ data: data });
                 _this2.setState({ ready: true });
-                console.log("data fetched!");
             });
         }
     }, {
@@ -21415,15 +21414,13 @@ var SearchInput = function (_React$Component) {
     }, {
         key: 'clearInput',
         value: function clearInput() {
-            console.log("clear");
             // do it by ref
             document.getElementById("city-input").value = '';
         }
     }, {
         key: 'clearList',
         value: function clearList() {
-            // fix the clear!
-            this._list.value = '';
+            this.setState({ cities: '' });
         }
     }, {
         key: 'showList',
@@ -21516,6 +21513,11 @@ var Droplist = function (_React$Component) {
     }
 
     _createClass(Droplist, [{
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
+            console.log("Did update");
+        }
+    }, {
         key: 'handleClick',
         value: function handleClick(city) {
             this.props.handleSearch(city);
@@ -21528,22 +21530,24 @@ var Droplist = function (_React$Component) {
             var _this2 = this;
 
             var cities = this.props.cities;
-            return _react2.default.createElement(
-                'ul',
-                { className: 'input__recommended-list', id: 'cities-list' },
-                cities.map(function (city, index) {
-                    return _react2.default.createElement(
-                        'li',
-                        {
-                            value: city,
-                            key: index,
-                            onClick: function onClick() {
-                                _this2.handleClick(city);
-                            } },
-                        city
-                    );
-                })
-            );
+            if (cities) {
+                return _react2.default.createElement(
+                    'ul',
+                    { className: 'input__recommended-list', id: 'cities-list' },
+                    cities.map(function (city, index) {
+                        return _react2.default.createElement(
+                            'li',
+                            {
+                                value: city,
+                                key: index,
+                                onClick: function onClick() {
+                                    _this2.handleClick(city);
+                                } },
+                            city
+                        );
+                    })
+                );
+            } else return _react2.default.createElement('ul', { className: 'input__recommended-list', id: 'cities-list' });
         }
     }]);
 

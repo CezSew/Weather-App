@@ -18,13 +18,12 @@ export default class SearchInput extends React.Component {
     }
     
     clearInput() {
-        console.log("clear");
         // do it by ref
         document.getElementById("city-input").value = '';
     }
+
     clearList() {
-        // fix the clear!
-        this._list.value = '';
+        this.setState({cities: ''}); 
     }
     showList(e) {
         const searchFieldValue = e.target.value;
@@ -44,9 +43,9 @@ export default class SearchInput extends React.Component {
                 
             });
          }
-         this.setState({cities: recommendedList});
-        
+         this.setState({cities: recommendedList}); 
     }
+    
     render() { 
         let cities = this.state.cities;
         return (

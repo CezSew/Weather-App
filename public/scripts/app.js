@@ -53,7 +53,6 @@ var Main = function (_React$Component) {
             }).then(function (data) {
                 _this2.setState({ data: data });
                 _this2.setState({ ready: true });
-                console.log("data fetched!");
             });
         }
     }, {

@@ -22,7 +22,6 @@ class Main extends React.Component {
         .then(data => {
                 this.setState({ data });
                 this.setState({ ready: true });
-                console.log("data fetched!");
             }
         );  
     }

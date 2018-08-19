@@ -6,6 +6,9 @@ export default class Droplist extends React.Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
+    componentDidUpdate() {
+        console.log("Did update");
+    }
     handleClick(city) {
         this.props.handleSearch(city);
         this.props.clearInput();
@@ -14,20 +17,25 @@ export default class Droplist extends React.Component {
 
     render() { 
         let cities = this.props.cities;
-        return (
+        if(cities) {
+            return (
+                <ul className="input__recommended-list" id="cities-list" >
+                    {cities.map((city, index)=>{
+                        return <li 
+                        value={city} 
+                        key={index} 
+                        onClick={
+                            ()=>{
+                                this.handleClick(city);
+                            }
+                            }>
+                        {city}</li>;
+                    })}
+                </ul>  
+            );
+        } else return (
             <ul className="input__recommended-list" id="cities-list" >
-                {cities.map((city, index)=>{
-                    return <li 
-                    value={city} 
-                    key={index} 
-                    onClick={
-                        ()=>{
-                            this.handleClick(city);
-                        }
-                        }>
-                    {city}</li>;
-                })}
             </ul>  
-        );
+            );
     }
 }
