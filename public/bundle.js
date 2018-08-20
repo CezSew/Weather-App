@@ -1043,7 +1043,9 @@ var Main = function (_React$Component) {
         _this.state = {
             weather: '',
             data: null,
-            ready: false
+            ready: false,
+            error: false,
+            errorText: ''
         };
         return _this;
     }
@@ -1070,6 +1072,7 @@ var Main = function (_React$Component) {
             var temperatureInCelsius = 0;
             var APICallbackObject = void 0;
             var requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
+
             fetch(requestURL).then(function (results) {
                 return results.json();
             }).then(function (data) {
@@ -1077,7 +1080,12 @@ var Main = function (_React$Component) {
             }).then(function () {
                 temperatureInKelvins = APICallbackObject.list[0].main.temp;
                 temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
-                _this3.setState({ weather: temperatureInCelsius });
+                _this3.setState({
+                    weather: temperatureInCelsius + '℃',
+                    error: false });
+            }).catch(function (error) {
+                console.log(error);
+                _this3.setState({ error: true });
             });
         }
     }, {
@@ -1095,23 +1103,31 @@ var Main = function (_React$Component) {
         value: function render() {
 
             if (!this.state.ready) return null;
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'p',
+            if (this.state.error) {
+                return _react2.default.createElement(
+                    'div',
                     null,
-                    'Test'
-                ),
-                this.state.weather,
-                _react2.default.createElement(
-                    'sup',
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        '0.1A Testing'
+                    ),
+                    'Nie znaleziono wpisanej miejscowo\u015Bci, spr\xF3buj ponownie!',
+                    _react2.default.createElement(_Search2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                );
+            } else {
+                return _react2.default.createElement(
+                    'div',
                     null,
-                    'o'
-                ),
-                'C',
-                _react2.default.createElement(_Search2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
-            );
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        '0.1A Testing'
+                    ),
+                    this.state.weather,
+                    _react2.default.createElement(_Search2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                );
+            }
         }
     }]);
 

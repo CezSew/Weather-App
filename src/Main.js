@@ -13,6 +13,8 @@ class Main extends React.Component {
             weather: '',
             data: null,
             ready: false,
+            error: false,
+            errorText: '',
         };
     }
 
@@ -31,16 +33,22 @@ class Main extends React.Component {
         let temperatureInCelsius = 0;
         let APICallbackObject;
         const requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
+        
         fetch(requestURL)
         .then(results => results.json())
         .then(data => APICallbackObject = data)
         .then(() => {
             temperatureInKelvins = APICallbackObject.list[0].main.temp;    
             temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
-            this.setState({weather: temperatureInCelsius})
-        })  
+            this.setState({
+                weather: temperatureInCelsius + '℃',
+                error: false});
+        }).catch(error => {
+            console.log(error);
+            this.setState({error: true});
+        } );
     }
-
+    
     componentWillMount() {
         this.getCities();
     }
@@ -50,16 +58,25 @@ class Main extends React.Component {
     }
 
     render() {
-
-        if(!this.state.ready)
-        return null; 
-        return (
-            <div>
-                <p>Test</p>
-                {this.state.weather}<sup>o</sup>C
-                <Search handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
-            </div>
-        );
+        
+        if(!this.state.ready) return null;
+        if(this.state.error) {
+            return (
+                <div>
+                    <p>0.1A Testing</p>
+                    Nie znaleziono wpisanej miejscowości, spróbuj ponownie!
+                    <Search handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <p>0.1A Testing</p>
+                    {this.state.weather}
+                    <Search handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
+                </div>
+            );
+        }
     }
 }
 
