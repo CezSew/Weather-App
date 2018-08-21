@@ -16,6 +16,8 @@ class Main extends React.Component {
             ready: false,
             error: false,
             typedCity: '',
+            country: '',
+            pressure: '',
         };
     }
 
@@ -30,8 +32,6 @@ class Main extends React.Component {
     }
     handleSearch(city) {
         console.log("selected: " + city);
-        let temperatureInKelvins;
-        let temperatureInCelsius = 0;
         let APICallbackObject;
         const requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
         
@@ -39,12 +39,19 @@ class Main extends React.Component {
         .then(results => results.json())
         .then(data => APICallbackObject = data)
         .then(() => {
-            temperatureInKelvins = APICallbackObject.list[0].main.temp;    
-            temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
+            console.log(APICallbackObject);
+            let temperatureInKelvins = APICallbackObject.list[0].main.temp;    
+            let temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
+            let pressure = APICallbackObject.list[0].main.pressure;
+            let weather = APICallbackObject.list[0].weather[0].main;
+            let country = APICallbackObject.city.country; 
             this.setState({
-                temperature: temperatureInCelsius + '℃',
+                temperature: temperatureInCelsius + ' ℃',
                 error: false,
-                typedCity: city
+                typedCity: city,
+                pressure: pressure + ' hPa',
+                weather: weather,
+                country: country,
             });
         }).catch(error => {
             console.log(error);
@@ -84,10 +91,12 @@ class Main extends React.Component {
                     <main className="weather-app">
                         <div className="container">
                             <header>
-                                <h1 className="weather-app__title">Weather App 0.2A</h1>
-                                {this.state.temperature ? <p className="weather-app__city"><b>{this.state.typedCity}</b></p> : ''}
+                                <h1 className="weather-app__title">Weather App 0.3A</h1>
+                                {this.state.temperature ? <p className="weather-app__city"><b>{this.state.typedCity}, {this.state.country}</b></p> : ''}
                             </header>
                             <p className="weather-app__temperature">{this.state.temperature}</p>
+                            <p className="weather-app__pressure">{this.state.pressure}</p>
+                            <p className="weather-app__weather">{this.state.weather}</p>
                             <SearchForm handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
                         </div>
                     </main>

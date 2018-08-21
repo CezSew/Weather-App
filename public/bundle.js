@@ -1050,7 +1050,9 @@ var Main = function (_React$Component) {
             data: null,
             ready: false,
             error: false,
-            typedCity: ''
+            typedCity: '',
+            country: '',
+            pressure: ''
         };
         return _this;
     }
@@ -1073,8 +1075,6 @@ var Main = function (_React$Component) {
             var _this3 = this;
 
             console.log("selected: " + city);
-            var temperatureInKelvins = void 0;
-            var temperatureInCelsius = 0;
             var APICallbackObject = void 0;
             var requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
 
@@ -1083,12 +1083,19 @@ var Main = function (_React$Component) {
             }).then(function (data) {
                 return APICallbackObject = data;
             }).then(function () {
-                temperatureInKelvins = APICallbackObject.list[0].main.temp;
-                temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
+                console.log(APICallbackObject);
+                var temperatureInKelvins = APICallbackObject.list[0].main.temp;
+                var temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
+                var pressure = APICallbackObject.list[0].main.pressure;
+                var weather = APICallbackObject.list[0].weather[0].main;
+                var country = APICallbackObject.city.country;
                 _this3.setState({
-                    temperature: temperatureInCelsius + '℃',
+                    temperature: temperatureInCelsius + ' ℃',
                     error: false,
-                    typedCity: city
+                    typedCity: city,
+                    pressure: pressure + ' hPa',
+                    weather: weather,
+                    country: country
                 });
             }).catch(function (error) {
                 console.log(error);
@@ -1163,7 +1170,7 @@ var Main = function (_React$Component) {
                                 _react2.default.createElement(
                                     'h1',
                                     { className: 'weather-app__title' },
-                                    'Weather App 0.2A'
+                                    'Weather App 0.3A'
                                 ),
                                 this.state.temperature ? _react2.default.createElement(
                                     'p',
@@ -1171,7 +1178,9 @@ var Main = function (_React$Component) {
                                     _react2.default.createElement(
                                         'b',
                                         null,
-                                        this.state.typedCity
+                                        this.state.typedCity,
+                                        ', ',
+                                        this.state.country
                                     )
                                 ) : ''
                             ),
@@ -1179,6 +1188,16 @@ var Main = function (_React$Component) {
                                 'p',
                                 { className: 'weather-app__temperature' },
                                 this.state.temperature
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'weather-app__pressure' },
+                                this.state.pressure
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'weather-app__weather' },
+                                this.state.weather
                             ),
                             _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
                         )
