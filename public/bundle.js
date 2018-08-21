@@ -1145,11 +1145,7 @@ var Main = function (_React$Component) {
                             _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
                         )
                     ),
-                    _react2.default.createElement(
-                        'footer',
-                        { className: 'weather-app__footer' },
-                        'Cezary Sewery\u0144ski @2018'
-                    )
+                    _react2.default.createElement(_Footer2.default, null)
                 );
             } else {
                 return _react2.default.createElement(
@@ -1187,11 +1183,7 @@ var Main = function (_React$Component) {
                             _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
                         )
                     ),
-                    _react2.default.createElement(
-                        'footer',
-                        { className: 'weather-app__footer' },
-                        'Cezary Sewery\u0144ski @2018'
-                    )
+                    _react2.default.createElement(_Footer2.default, null)
                 );
             }
         }
@@ -21639,6 +21631,30 @@ exports.default = Search;
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(7);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+        return _react2.default.createElement(
+                'footer',
+                { className: 'weather-app__footer' },
+                'Cezary Sewery\u0144ski @2018'
+        );
+};
+
+exports.default = Footer;
 
 /***/ })
 /******/ ]);

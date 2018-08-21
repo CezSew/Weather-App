@@ -75,7 +75,7 @@ class Main extends React.Component {
                             <SearchForm handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
                         </div>
                     </main>
-                    <footer className="weather-app__footer">Cezary Seweryński @2018</footer>
+                    <Footer />
                 </div>
             );
         } else {
@@ -91,7 +91,7 @@ class Main extends React.Component {
                             <SearchForm handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
                         </div>
                     </main>
-                    <footer className="weather-app__footer">Cezary Seweryński @2018</footer>
+                    <Footer />
                 </div>
             );
         }
