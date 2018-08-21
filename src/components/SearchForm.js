@@ -18,13 +18,10 @@ export default class Search extends React.Component {
       
     render() {
         return (
-            <div>
-                <br /><br />
-                <form onSubmit={this.handleSearch}>
-                    <SearchInput listOfCities={this.props.listOfCities} handleSearch={this.props.handleSearch}/>
-                    <button>Wyszukaj</button>
-                </form>
-            </div>
+            <form onSubmit={this.handleSearch}>
+                <SearchInput listOfCities={this.props.listOfCities} handleSearch={this.props.handleSearch}/>
+                <button>Wyszukaj</button>
+            </form>
         )
     }
 }

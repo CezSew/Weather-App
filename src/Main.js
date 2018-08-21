@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Search from './components/Search';
-
+import SearchForm from './components/SearchForm';
+import Footer from './components/Footer';
 
 const rootDir = document.getElementById('app');
 
@@ -11,10 +11,11 @@ class Main extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.state = {
             weather: '',
+            temperature: '',
             data: null,
             ready: false,
             error: false,
-            errorText: '',
+            typedCity: '',
         };
     }
 
@@ -41,11 +42,13 @@ class Main extends React.Component {
             temperatureInKelvins = APICallbackObject.list[0].main.temp;    
             temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
             this.setState({
-                weather: temperatureInCelsius + '℃',
-                error: false});
+                temperature: temperatureInCelsius + '℃',
+                error: false,
+                typedCity: city
+            });
         }).catch(error => {
             console.log(error);
-            this.setState({error: true});
+            this.setState({error: true, typedCity: city});
         } );
     }
     
@@ -62,18 +65,33 @@ class Main extends React.Component {
         if(!this.state.ready) return null;
         if(this.state.error) {
             return (
-                <div>
-                    <p>0.1A Testing</p>
-                    Nie znaleziono wpisanej miejscowości, spróbuj ponownie!
-                    <Search handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
+                <div className="app">
+                    <main className="weather-app">
+                        <div className="container">
+                            <header>
+                                <h1 className="weather-app__title">Weather App 0.2A</h1>
+                                <p className="weather-app__city">Nie znaleziono miejscowości o nazwie <b>"{this.state.typedCity}"</b>, spróbuj ponownie!</p>
+                            </header>
+                            <SearchForm handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
+                        </div>
+                    </main>
+                    <footer className="weather-app__footer">Cezary Seweryński @2018</footer>
                 </div>
             );
         } else {
             return (
-                <div>
-                    <p>0.1A Testing</p>
-                    {this.state.weather}
-                    <Search handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
+                <div className="app">
+                    <main className="weather-app">
+                        <div className="container">
+                            <header>
+                                <h1 className="weather-app__title">Weather App 0.2A</h1>
+                                {this.state.temperature ? <p className="weather-app__city"><b>{this.state.typedCity}</b></p> : ''}
+                            </header>
+                            <p className="weather-app__temperature">{this.state.temperature}</p>
+                            <SearchForm handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
+                        </div>
+                    </main>
+                    <footer className="weather-app__footer">Cezary Seweryński @2018</footer>
                 </div>
             );
         }

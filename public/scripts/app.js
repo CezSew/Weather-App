@@ -10,9 +10,13 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Search = require('./components/Search');
+var _SearchForm = require('./components/SearchForm');
 
-var _Search2 = _interopRequireDefault(_Search);
+var _SearchForm2 = _interopRequireDefault(_SearchForm);
+
+var _Footer = require('./components/Footer');
+
+var _Footer2 = _interopRequireDefault(_Footer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37,10 +41,11 @@ var Main = function (_React$Component) {
         _this.handleSearch = _this.handleSearch.bind(_this);
         _this.state = {
             weather: '',
+            temperature: '',
             data: null,
             ready: false,
             error: false,
-            errorText: ''
+            typedCity: ''
         };
         return _this;
     }
@@ -76,11 +81,13 @@ var Main = function (_React$Component) {
                 temperatureInKelvins = APICallbackObject.list[0].main.temp;
                 temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
                 _this3.setState({
-                    weather: temperatureInCelsius + '℃',
-                    error: false });
+                    temperature: temperatureInCelsius + '℃',
+                    error: false,
+                    typedCity: city
+                });
             }).catch(function (error) {
                 console.log(error);
-                _this3.setState({ error: true });
+                _this3.setState({ error: true, typedCity: city });
             });
         }
     }, {
@@ -101,26 +108,85 @@ var Main = function (_React$Component) {
             if (this.state.error) {
                 return _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'app' },
                     _react2.default.createElement(
-                        'p',
-                        null,
-                        '0.1A Testing'
+                        'main',
+                        { className: 'weather-app' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'container' },
+                            _react2.default.createElement(
+                                'header',
+                                null,
+                                _react2.default.createElement(
+                                    'h1',
+                                    { className: 'weather-app__title' },
+                                    'Weather App 0.2A'
+                                ),
+                                _react2.default.createElement(
+                                    'p',
+                                    { className: 'weather-app__city' },
+                                    'Nie znaleziono miejscowo\u015Bci o nazwie ',
+                                    _react2.default.createElement(
+                                        'b',
+                                        null,
+                                        '"',
+                                        this.state.typedCity,
+                                        '"'
+                                    ),
+                                    ', spr\xF3buj ponownie!'
+                                )
+                            ),
+                            _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                        )
                     ),
-                    'Nie znaleziono wpisanej miejscowo\u015Bci, spr\xF3buj ponownie!',
-                    _react2.default.createElement(_Search2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                    _react2.default.createElement(
+                        'footer',
+                        { className: 'weather-app__footer' },
+                        'Cezary Sewery\u0144ski @2018'
+                    )
                 );
             } else {
                 return _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'app' },
                     _react2.default.createElement(
-                        'p',
-                        null,
-                        '0.1A Testing'
+                        'main',
+                        { className: 'weather-app' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'container' },
+                            _react2.default.createElement(
+                                'header',
+                                null,
+                                _react2.default.createElement(
+                                    'h1',
+                                    { className: 'weather-app__title' },
+                                    'Weather App 0.2A'
+                                ),
+                                this.state.temperature ? _react2.default.createElement(
+                                    'p',
+                                    { className: 'weather-app__city' },
+                                    _react2.default.createElement(
+                                        'b',
+                                        null,
+                                        this.state.typedCity
+                                    )
+                                ) : ''
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'weather-app__temperature' },
+                                this.state.temperature
+                            ),
+                            _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                        )
                     ),
-                    this.state.weather,
-                    _react2.default.createElement(_Search2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                    _react2.default.createElement(
+                        'footer',
+                        { className: 'weather-app__footer' },
+                        'Cezary Sewery\u0144ski @2018'
+                    )
                 );
             }
         }

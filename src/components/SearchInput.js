@@ -40,7 +40,6 @@ export default class SearchInput extends React.Component {
                         recommendedList.push(key);
                     } 
                 }
-                
             });
          }
          this.setState({cities: recommendedList}); 
@@ -49,7 +48,7 @@ export default class SearchInput extends React.Component {
     render() { 
         let cities = this.state.cities;
         return (
-            <div>
+            <div className="weather-app__input-container">
                 <input id="city-input" onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
                 <Droplist 
                 ref={(element) => this._list = element}

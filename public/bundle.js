@@ -1015,9 +1015,13 @@ var _reactDom = __webpack_require__(7);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Search = __webpack_require__(32);
+var _SearchForm = __webpack_require__(35);
 
-var _Search2 = _interopRequireDefault(_Search);
+var _SearchForm2 = _interopRequireDefault(_SearchForm);
+
+var _Footer = __webpack_require__(36);
+
+var _Footer2 = _interopRequireDefault(_Footer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1042,10 +1046,11 @@ var Main = function (_React$Component) {
         _this.handleSearch = _this.handleSearch.bind(_this);
         _this.state = {
             weather: '',
+            temperature: '',
             data: null,
             ready: false,
             error: false,
-            errorText: ''
+            typedCity: ''
         };
         return _this;
     }
@@ -1081,11 +1086,13 @@ var Main = function (_React$Component) {
                 temperatureInKelvins = APICallbackObject.list[0].main.temp;
                 temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
                 _this3.setState({
-                    weather: temperatureInCelsius + '℃',
-                    error: false });
+                    temperature: temperatureInCelsius + '℃',
+                    error: false,
+                    typedCity: city
+                });
             }).catch(function (error) {
                 console.log(error);
-                _this3.setState({ error: true });
+                _this3.setState({ error: true, typedCity: city });
             });
         }
     }, {
@@ -1106,26 +1113,85 @@ var Main = function (_React$Component) {
             if (this.state.error) {
                 return _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'app' },
                     _react2.default.createElement(
-                        'p',
-                        null,
-                        '0.1A Testing'
+                        'main',
+                        { className: 'weather-app' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'container' },
+                            _react2.default.createElement(
+                                'header',
+                                null,
+                                _react2.default.createElement(
+                                    'h1',
+                                    { className: 'weather-app__title' },
+                                    'Weather App 0.2A'
+                                ),
+                                _react2.default.createElement(
+                                    'p',
+                                    { className: 'weather-app__city' },
+                                    'Nie znaleziono miejscowo\u015Bci o nazwie ',
+                                    _react2.default.createElement(
+                                        'b',
+                                        null,
+                                        '"',
+                                        this.state.typedCity,
+                                        '"'
+                                    ),
+                                    ', spr\xF3buj ponownie!'
+                                )
+                            ),
+                            _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                        )
                     ),
-                    'Nie znaleziono wpisanej miejscowo\u015Bci, spr\xF3buj ponownie!',
-                    _react2.default.createElement(_Search2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                    _react2.default.createElement(
+                        'footer',
+                        { className: 'weather-app__footer' },
+                        'Cezary Sewery\u0144ski @2018'
+                    )
                 );
             } else {
                 return _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'app' },
                     _react2.default.createElement(
-                        'p',
-                        null,
-                        '0.1A Testing'
+                        'main',
+                        { className: 'weather-app' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'container' },
+                            _react2.default.createElement(
+                                'header',
+                                null,
+                                _react2.default.createElement(
+                                    'h1',
+                                    { className: 'weather-app__title' },
+                                    'Weather App 0.2A'
+                                ),
+                                this.state.temperature ? _react2.default.createElement(
+                                    'p',
+                                    { className: 'weather-app__city' },
+                                    _react2.default.createElement(
+                                        'b',
+                                        null,
+                                        this.state.typedCity
+                                    )
+                                ) : ''
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'weather-app__temperature' },
+                                this.state.temperature
+                            ),
+                            _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                        )
                     ),
-                    this.state.weather,
-                    _react2.default.createElement(_Search2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                    _react2.default.createElement(
+                        'footer',
+                        { className: 'weather-app__footer' },
+                        'Cezary Sewery\u0144ski @2018'
+                    )
                 );
             }
         }
@@ -21290,88 +21356,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(3);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(7);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _SearchInput = __webpack_require__(33);
-
-var _SearchInput2 = _interopRequireDefault(_SearchInput);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Search = function (_React$Component) {
-    _inherits(Search, _React$Component);
-
-    function Search(props) {
-        _classCallCheck(this, Search);
-
-        var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
-
-        _this.handleSearch = _this.handleSearch.bind(_this);
-        return _this;
-    }
-
-    _createClass(Search, [{
-        key: 'handleSearch',
-        value: function handleSearch(e) {
-            e.preventDefault();
-            var city = e.target.elements.city.value.trim();
-            e.target.elements.city.value = '';
-            if (city) {
-                this.props.handleSearch(city);
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'form',
-                    { onSubmit: this.handleSearch },
-                    _react2.default.createElement(_SearchInput2.default, { listOfCities: this.props.listOfCities, handleSearch: this.props.handleSearch }),
-                    _react2.default.createElement(
-                        'button',
-                        null,
-                        'Wyszukaj'
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Search;
-}(_react2.default.Component);
-
-exports.default = Search;
-
-/***/ }),
+/* 32 */,
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21467,7 +21452,7 @@ var SearchInput = function (_React$Component) {
             var cities = this.state.cities;
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'weather-app__input-container' },
                 _react2.default.createElement('input', { id: 'city-input', onKeyUp: this.handleKeyUp, type: 'text', name: 'city', placeholder: 'Miasto', autoComplete: 'off' }),
                 _react2.default.createElement(_Droplist2.default, {
                     ref: function ref(element) {
@@ -21571,6 +21556,89 @@ var Droplist = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Droplist;
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(7);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _SearchInput = __webpack_require__(33);
+
+var _SearchInput2 = _interopRequireDefault(_SearchInput);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Search = function (_React$Component) {
+    _inherits(Search, _React$Component);
+
+    function Search(props) {
+        _classCallCheck(this, Search);
+
+        var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+
+        _this.handleSearch = _this.handleSearch.bind(_this);
+        return _this;
+    }
+
+    _createClass(Search, [{
+        key: 'handleSearch',
+        value: function handleSearch(e) {
+            e.preventDefault();
+            var city = e.target.elements.city.value.trim();
+            e.target.elements.city.value = '';
+            if (city) {
+                this.props.handleSearch(city);
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'form',
+                { onSubmit: this.handleSearch },
+                _react2.default.createElement(_SearchInput2.default, { listOfCities: this.props.listOfCities, handleSearch: this.props.handleSearch }),
+                _react2.default.createElement(
+                    'button',
+                    null,
+                    'Wyszukaj'
+                )
+            );
+        }
+    }]);
+
+    return Search;
+}(_react2.default.Component);
+
+exports.default = Search;
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /***/ })
 /******/ ]);
