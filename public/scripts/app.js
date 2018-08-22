@@ -39,6 +39,7 @@ var Main = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
         _this.handleSearch = _this.handleSearch.bind(_this);
+        _this.translateWeatherStatus = _this.translateWeatherStatus.bind(_this);
         _this.state = {
             weather: '',
             temperature: '',
@@ -65,11 +66,33 @@ var Main = function (_React$Component) {
             });
         }
     }, {
+        key: 'translateWeatherStatus',
+        value: function translateWeatherStatus(weather) {
+            if (weather === 'clear sky') {
+                return "Bezchmurnie";
+            } else if (weather === 'few clouds') {
+                return "Niskie zachmurzenie";
+            } else if (weather === 'scattered clouds' || weather === 'broken clouds') {
+                return "Umiarkowane zachmurzenie";
+            } else if (weather === 'mist') {
+                return "Mgła";
+            } else if (weather === 'shower rain') {
+                return "Ulewny deszcz";
+            } else if (weather === 'rain') {
+                return "Deszcz";
+            } else if (weather === 'thunderstorm') {
+                return "Burza z piorunami";
+            } else if (weather === 'snow') {
+                return "Śnieg";
+            } else {
+                return weather;
+            }
+        }
+    }, {
         key: 'handleSearch',
         value: function handleSearch(city) {
             var _this3 = this;
 
-            console.log("selected: " + city);
             var APICallbackObject = void 0;
             var requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
 
@@ -82,14 +105,15 @@ var Main = function (_React$Component) {
                 var temperatureInKelvins = APICallbackObject.list[0].main.temp;
                 var temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
                 var pressure = APICallbackObject.list[0].main.pressure;
-                var weather = APICallbackObject.list[0].weather[0].main;
+                var weather = APICallbackObject.list[0].weather[0].description;
+                var translatedWeather = _this3.translateWeatherStatus(weather);
                 var country = APICallbackObject.city.country;
                 _this3.setState({
                     temperature: temperatureInCelsius + ' ℃',
                     error: false,
                     typedCity: city,
                     pressure: pressure + ' hPa',
-                    weather: weather,
+                    weather: translatedWeather,
                     country: country
                 });
             }).catch(function (error) {

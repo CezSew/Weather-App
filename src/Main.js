@@ -9,6 +9,7 @@ class Main extends React.Component {
     constructor(props){
         super(props);
         this.handleSearch = this.handleSearch.bind(this);
+        this.translateWeatherStatus = this.translateWeatherStatus.bind(this);
         this.state = {
             weather: '',
             temperature: '',
@@ -30,8 +31,29 @@ class Main extends React.Component {
             }
         );  
     }
+    translateWeatherStatus(weather) {
+        if(weather==='clear sky') {
+            return "Bezchmurnie";
+        } else if (weather==='few clouds') {
+            return "Niskie zachmurzenie";
+        } else if (weather==='scattered clouds' || weather==='broken clouds') {
+            return "Umiarkowane zachmurzenie";
+        } else if (weather==='mist') {
+            return "Mgła";
+        } else if (weather==='shower rain') {
+            return "Ulewny deszcz";
+        } else if (weather==='rain') {
+            return "Deszcz";
+        } else if (weather==='thunderstorm') {
+            return "Burza z piorunami";
+        } else if (weather==='snow') {
+            return "Śnieg";
+        } else {
+            return weather;
+        }
+    }
+
     handleSearch(city) {
-        console.log("selected: " + city);
         let APICallbackObject;
         const requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
         
@@ -43,14 +65,15 @@ class Main extends React.Component {
             let temperatureInKelvins = APICallbackObject.list[0].main.temp;    
             let temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
             let pressure = APICallbackObject.list[0].main.pressure;
-            let weather = APICallbackObject.list[0].weather[0].main;
+            let weather = APICallbackObject.list[0].weather[0].description;
+            let translatedWeather = this.translateWeatherStatus(weather);
             let country = APICallbackObject.city.country; 
             this.setState({
                 temperature: temperatureInCelsius + ' ℃',
                 error: false,
                 typedCity: city,
                 pressure: pressure + ' hPa',
-                weather: weather,
+                weather: translatedWeather,
                 country: country,
             });
         }).catch(error => {
