@@ -1023,6 +1023,14 @@ var _Footer = __webpack_require__(35);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
+var _Header = __webpack_require__(36);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _WeatherData = __webpack_require__(37);
+
+var _WeatherData2 = _interopRequireDefault(_WeatherData);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1044,7 +1052,6 @@ var Main = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
         _this.handleSearch = _this.handleSearch.bind(_this);
-        _this.translateWeatherStatus = _this.translateWeatherStatus.bind(_this);
         _this.state = {
             weather: '',
             temperature: '',
@@ -1071,47 +1078,6 @@ var Main = function (_React$Component) {
             });
         }
     }, {
-        key: 'translateWeatherStatus',
-        value: function translateWeatherStatus(weather) {
-            if (weather === 'clear sky') {
-                return "Bezchmurnie";
-            } else if (weather === 'few clouds') {
-                return "Niskie zachmurzenie";
-            } else if (weather === 'scattered clouds' || weather === 'broken clouds' || weather === 'overcast clouds') {
-                return "Umiarkowane zachmurzenie";
-            } else if (weather === 'mist') {
-                return "Mgła";
-            } else if (weather === 'shower rain' || weather === 'very heavy rain' || weather === 'heavy intensity shower rain') {
-                return "Ulewny deszcz";
-            } else if (weather === 'rain' || weather === 'light intensity shower rain' || weather === 'ragged shower rain') {
-                return "Deszcz";
-            } else if (weather === 'light rain') {
-                return "Mżawka";
-            } else if (weather === 'moderate rain') {
-                return "Umiarkowane opady deszczu";
-            } else if (weather === 'heavy intensity rain') {
-                return "Intensywne opady deszczu";
-            } else if (weather === 'extreme rain') {
-                return "Ekstremalne opady deszczu";
-            } else if (weather === 'freezing rain') {
-                return "Deszcz marznący";
-            } else if (weather === 'thunderstorm') {
-                return "Burza z piorunami";
-            } else if (weather === 'snow') {
-                return "Opady śniegu";
-            } else if (weather === 'light snow') {
-                return "Małe opady śniegu";
-            } else if (weather === 'heavy snow') {
-                return "Duże opady śniegu";
-            } else if (weather === 'sleet' || weather === 'shower sleet' || weather === 'light rain and snow' || weather === 'rain and snow' || weather === 'light shower snow' || weather === 'shower snow' || weather === 'heavy shower snow') {
-                return "Śnieg z deszczem";
-            } else if (weather === 'sleet') {
-                return "Śnieg z deszczem";
-            } else {
-                return weather;
-            }
-        }
-    }, {
         key: 'handleSearch',
         value: function handleSearch(city) {
             var _this3 = this;
@@ -1129,14 +1095,13 @@ var Main = function (_React$Component) {
                 var temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
                 var pressure = APICallbackObject.list[0].main.pressure;
                 var weather = APICallbackObject.list[0].weather[0].description;
-                var translatedWeather = _this3.translateWeatherStatus(weather);
                 var country = APICallbackObject.city.country;
                 _this3.setState({
                     temperature: temperatureInCelsius + ' ℃',
                     error: false,
                     typedCity: city,
                     pressure: pressure + ' hPa',
-                    weather: translatedWeather,
+                    weather: weather,
                     country: country
                 });
             }).catch(function (error) {
@@ -1157,96 +1122,23 @@ var Main = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-
             if (!this.state.ready) return null;
-            if (this.state.error) {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'app' },
+            return _react2.default.createElement(
+                'div',
+                { className: 'app' },
+                _react2.default.createElement(
+                    'main',
+                    { className: 'weather-app' },
                     _react2.default.createElement(
-                        'main',
-                        { className: 'weather-app' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container' },
-                            _react2.default.createElement(
-                                'header',
-                                null,
-                                _react2.default.createElement(
-                                    'h1',
-                                    { className: 'weather-app__title' },
-                                    'Weather App 0.2A'
-                                ),
-                                _react2.default.createElement(
-                                    'p',
-                                    { className: 'weather-app__city' },
-                                    'Nie znaleziono miejscowo\u015Bci o nazwie ',
-                                    _react2.default.createElement(
-                                        'b',
-                                        null,
-                                        '"',
-                                        this.state.typedCity,
-                                        '"'
-                                    ),
-                                    ', spr\xF3buj ponownie!'
-                                )
-                            ),
-                            _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
-                        )
-                    ),
-                    _react2.default.createElement(_Footer2.default, null)
-                );
-            } else {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'app' },
-                    _react2.default.createElement(
-                        'main',
-                        { className: 'weather-app' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container' },
-                            _react2.default.createElement(
-                                'header',
-                                null,
-                                _react2.default.createElement(
-                                    'h1',
-                                    { className: 'weather-app__title' },
-                                    'Weather App 0.3A'
-                                ),
-                                this.state.temperature ? _react2.default.createElement(
-                                    'p',
-                                    { className: 'weather-app__city' },
-                                    _react2.default.createElement(
-                                        'b',
-                                        null,
-                                        this.state.typedCity,
-                                        ', ',
-                                        this.state.country
-                                    )
-                                ) : ''
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'weather-app__temperature' },
-                                this.state.temperature
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'weather-app__pressure' },
-                                this.state.pressure
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'weather-app__weather' },
-                                this.state.weather
-                            ),
-                            _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
-                        )
-                    ),
-                    _react2.default.createElement(_Footer2.default, null)
-                );
-            }
+                        'div',
+                        { className: 'container' },
+                        _react2.default.createElement(_Header2.default, { typedCity: this.state.typedCity, country: this.state.country, isError: this.state.error }),
+                        _react2.default.createElement(_WeatherData2.default, { pressure: this.state.pressure, weather: this.state.weather, temperature: this.state.temperature, isError: this.state.error }),
+                        _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
+                    )
+                ),
+                _react2.default.createElement(_Footer2.default, null)
+            );
         }
     }]);
 
@@ -21715,6 +21607,213 @@ var Footer = function Footer() {
 };
 
 exports.default = Footer;
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(5);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Header = function (_React$Component) {
+    _inherits(Header, _React$Component);
+
+    function Header() {
+        _classCallCheck(this, Header);
+
+        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    }
+
+    _createClass(Header, [{
+        key: 'render',
+        value: function render() {
+            if (!this.props.error) {
+                return _react2.default.createElement(
+                    'header',
+                    null,
+                    _react2.default.createElement(
+                        'h1',
+                        { className: 'weather-app__title' },
+                        'Weather App 0.3A'
+                    ),
+                    this.props.typedCity ? _react2.default.createElement(
+                        'p',
+                        { className: 'weather-app__city' },
+                        _react2.default.createElement(
+                            'b',
+                            null,
+                            this.props.typedCity,
+                            ', ',
+                            this.props.country
+                        )
+                    ) : ''
+                );
+            } else {
+                return _react2.default.createElement(
+                    'header',
+                    null,
+                    _react2.default.createElement(
+                        'h1',
+                        { className: 'weather-app__title' },
+                        'Weather App 0.3A'
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        { className: 'weather-app__city' },
+                        'Nie znaleziono miejscowo\u015Bci o nazwie ',
+                        _react2.default.createElement(
+                            'b',
+                            null,
+                            '"',
+                            this.props.typedCity,
+                            '"'
+                        ),
+                        ', spr\xF3buj ponownie!'
+                    )
+                );
+            }
+        }
+    }]);
+
+    return Header;
+}(_react2.default.Component);
+
+exports.default = Header;
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(5);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var WeatherData = function (_React$Component) {
+    _inherits(WeatherData, _React$Component);
+
+    function WeatherData(props) {
+        _classCallCheck(this, WeatherData);
+
+        var _this = _possibleConstructorReturn(this, (WeatherData.__proto__ || Object.getPrototypeOf(WeatherData)).call(this, props));
+
+        _this.translateWeatherStatus = _this.translateWeatherStatus.bind(_this);
+        return _this;
+    }
+
+    _createClass(WeatherData, [{
+        key: 'translateWeatherStatus',
+        value: function translateWeatherStatus(weather) {
+            if (weather === 'clear sky') {
+                return "Bezchmurnie";
+            } else if (weather === 'few clouds') {
+                return "Niskie zachmurzenie";
+            } else if (weather === 'scattered clouds' || weather === 'broken clouds' || weather === 'overcast clouds') {
+                return "Umiarkowane zachmurzenie";
+            } else if (weather === 'mist') {
+                return "Mgła";
+            } else if (weather === 'shower rain' || weather === 'very heavy rain' || weather === 'heavy intensity shower rain') {
+                return "Ulewny deszcz";
+            } else if (weather === 'rain' || weather === 'light intensity shower rain' || weather === 'ragged shower rain') {
+                return "Deszcz";
+            } else if (weather === 'light rain') {
+                return "Mżawka";
+            } else if (weather === 'moderate rain') {
+                return "Umiarkowane opady deszczu";
+            } else if (weather === 'heavy intensity rain') {
+                return "Intensywne opady deszczu";
+            } else if (weather === 'extreme rain') {
+                return "Ekstremalne opady deszczu";
+            } else if (weather === 'freezing rain') {
+                return "Deszcz marznący";
+            } else if (weather === 'thunderstorm') {
+                return "Burza z piorunami";
+            } else if (weather === 'snow') {
+                return "Opady śniegu";
+            } else if (weather === 'light snow') {
+                return "Małe opady śniegu";
+            } else if (weather === 'heavy snow') {
+                return "Duże opady śniegu";
+            } else if (weather === 'sleet' || weather === 'shower sleet' || weather === 'light rain and snow' || weather === 'rain and snow' || weather === 'light shower snow' || weather === 'shower snow' || weather === 'heavy shower snow') {
+                return "Śnieg z deszczem";
+            } else if (weather === 'sleet') {
+                return "Śnieg z deszczem";
+            } else {
+                return weather;
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            if (this.props.isError) return null;
+            return _react2.default.createElement(
+                'section',
+                { className: 'weather-data' },
+                _react2.default.createElement(
+                    'p',
+                    { className: 'weather-data__temperature' },
+                    this.props.temperature
+                ),
+                _react2.default.createElement(
+                    'p',
+                    { className: 'weather-data__pressure' },
+                    this.props.pressure
+                ),
+                _react2.default.createElement(
+                    'p',
+                    { className: 'weather-data__weather' },
+                    this.translateWeatherStatus(this.props.weather)
+                )
+            );
+        }
+    }]);
+
+    return WeatherData;
+}(_react2.default.Component);
+
+exports.default = WeatherData;
 
 /***/ })
 /******/ ]);
