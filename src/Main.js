@@ -41,7 +41,6 @@ class Main extends React.Component {
         .then(results => results.json())
         .then(data => APICallbackObject = data)
         .then(() => {
-            console.log(APICallbackObject);
             let temperatureInKelvins = APICallbackObject.list[0].main.temp;    
             let temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
             let pressure = APICallbackObject.list[0].main.pressure;
@@ -56,7 +55,6 @@ class Main extends React.Component {
                 country: country,
             });
         }).catch(error => {
-            console.log(error);
             this.setState({error: true, typedCity: city});
         } );
     }
@@ -65,10 +63,6 @@ class Main extends React.Component {
         this.getCities();
     }
     
-    componentDidMount(){
-        console.log(this.state.data);
-    }
-
     render() {
         if(!this.state.ready) return null;
         return (

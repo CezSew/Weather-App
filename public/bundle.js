@@ -1090,7 +1090,6 @@ var Main = function (_React$Component) {
             }).then(function (data) {
                 return APICallbackObject = data;
             }).then(function () {
-                console.log(APICallbackObject);
                 var temperatureInKelvins = APICallbackObject.list[0].main.temp;
                 var temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15) * 100) / 100;
                 var pressure = APICallbackObject.list[0].main.pressure;
@@ -1105,7 +1104,6 @@ var Main = function (_React$Component) {
                     country: country
                 });
             }).catch(function (error) {
-                console.log(error);
                 _this3.setState({ error: true, typedCity: city });
             });
         }
@@ -1113,11 +1111,6 @@ var Main = function (_React$Component) {
         key: 'componentWillMount',
         value: function componentWillMount() {
             this.getCities();
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            console.log(this.state.data);
         }
     }, {
         key: 'render',
