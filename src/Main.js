@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import WeatherData from './components/WeatherData';
 
+
 const rootDir = document.getElementById('app');
 
 class Main extends React.Component {
@@ -62,7 +63,7 @@ class Main extends React.Component {
     componentWillMount() {
         this.getCities();
     }
-    
+
     render() {
         if(!this.state.ready) return null;
         return (
