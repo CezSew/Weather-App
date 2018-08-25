@@ -4,7 +4,7 @@ import SearchForm from './components/SearchForm';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import WeatherData from './components/WeatherData';
-
+import './styles/Main.scss';
 
 const rootDir = document.getElementById('app');
 

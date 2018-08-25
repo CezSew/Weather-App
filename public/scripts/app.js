@@ -26,6 +26,8 @@ var _WeatherData = require('./components/WeatherData');
 
 var _WeatherData2 = _interopRequireDefault(_WeatherData);
 
+require('./styles/Main.scss');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
