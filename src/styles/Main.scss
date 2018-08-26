@@ -1,6 +1,24 @@
-$themeColor-Light: #f3e2c7;
-$themeColor-Dark:#b68d4c;
+$themeColor: #eeeeee;
+$breakPoint1: 1180px;
+
+h1,h2,h3,h4,h5,h6,p {
+    margin: 0;
+}
 
 body {
-    background-color:$themeColor-Dark;
+    background-color:$themeColor;
+    padding: 0;
+    margin: 0;
+}
+.container {
+    margin: 0 auto;
+    @media(min-width: $breakPoint1) {
+        max-width: 1140px;
+    }
+}
+.header {
+    height: 240px;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SearchForm from './components/SearchForm';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import WeatherData from './components/WeatherData';
@@ -69,11 +68,17 @@ class Main extends React.Component {
         return (
             <div className="app">
                 <main className="weather-app">
-                    <div className="container">
-                        <Header typedCity={this.state.typedCity} country={this.state.country} isError={this.state.error}/>
-                        <WeatherData pressure={this.state.pressure} weather={this.state.weather} temperature={this.state.temperature} isError={this.state.error} />
-                        <SearchForm handleSearch={this.handleSearch} listOfCities={this.state.data} handleSearch={this.handleSearch}/>
-                    </div>
+                    <Header 
+                    typedCity={this.state.typedCity} 
+                    country={this.state.country} 
+                    isError={this.state.error}
+                    handleSearch={this.handleSearch} 
+                    listOfCities={this.state.data} />
+                    <WeatherData 
+                    pressure={this.state.pressure} 
+                    weather={this.state.weather} 
+                    temperature={this.state.temperature} 
+                    isError={this.state.error} />
                 </main>
                 <Footer />
             </div>

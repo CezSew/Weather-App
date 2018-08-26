@@ -119,13 +119,9 @@ var Main = function (_React$Component) {
                 _react2.default.createElement(
                     'main',
                     { className: 'weather-app' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'container' },
-                        _react2.default.createElement(_Header2.default, { typedCity: this.state.typedCity, country: this.state.country, isError: this.state.error }),
-                        _react2.default.createElement(_WeatherData2.default, { pressure: this.state.pressure, weather: this.state.weather, temperature: this.state.temperature, isError: this.state.error }),
-                        _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
-                    )
+                    _react2.default.createElement(_Header2.default, { typedCity: this.state.typedCity, country: this.state.country, isError: this.state.error }),
+                    _react2.default.createElement(_WeatherData2.default, { pressure: this.state.pressure, weather: this.state.weather, temperature: this.state.temperature, isError: this.state.error }),
+                    _react2.default.createElement(_SearchForm2.default, _defineProperty({ handleSearch: this.handleSearch, listOfCities: this.state.data }, 'handleSearch', this.handleSearch))
                 ),
                 _react2.default.createElement(_Footer2.default, null)
             );
