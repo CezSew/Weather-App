@@ -1,0 +1,21 @@
+$breakPoint1: 1180px;
+$breakPoint2: 1050px;
+
+.header {
+    .container {
+        .weather-app__title {
+            font-weight: 400;
+            font-size: 3em;
+        }
+        .weather-app__form.form {
+            .form__container {
+                .form__recommended-list.recommended-list {
+                    .recommended-list__list-item {
+
+                    }
+                }
+            }
+        }
+    }
+}
+

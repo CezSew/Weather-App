@@ -1,5 +1,6 @@
 $themeColor: #eeeeee;
 $breakPoint1: 1180px;
+$breakPoint2: 1050px;
 
 h1,h2,h3,h4,h5,h6,p {
     margin: 0;
@@ -9,6 +10,7 @@ body {
     background-color:$themeColor;
     padding: 0;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 .container {
     margin: 0 auto;
@@ -21,4 +23,12 @@ body {
     background-color: #fff;
     justify-content: center;
     align-items: center;
+}
+
+.button {
+
+}
+
+.button.button--submit {
+
 }
