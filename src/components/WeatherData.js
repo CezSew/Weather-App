@@ -49,9 +49,11 @@ export default class WeatherData extends React.Component {
         if(this.props.isError) return null;
         return  (
             <section className="weather-data">
-                <p className="weather-data__temperature">{this.props.temperature}</p>
-                <p className="weather-data__pressure">{this.props.pressure}</p>
-                <p className="weather-data__weather">{this.translateWeatherStatus(this.props.weather)}</p>
+                <div className="container">
+                    <p className="weather-data__temperature">{this.props.temperature}</p>
+                    <p className="weather-data__pressure">{this.props.pressure}</p>
+                    <p className="weather-data__weather">{this.translateWeatherStatus(this.props.weather)}</p>
+                </div>
             </section>
         );
     }
