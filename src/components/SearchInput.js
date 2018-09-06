@@ -48,8 +48,8 @@ export default class SearchInput extends React.Component {
     render() { 
         let cities = this.state.cities;
         return (
-            <div className="weather-app__input-container">
-                <input id="city-input" onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
+            <div className="form__container">
+                <input id="city-input" className="input input--text" onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
                 <Droplist 
                 ref={(element) => this._list = element}
                 cities={cities} 

@@ -18,9 +18,9 @@ export default class Search extends React.Component {
       
     render() {
         return (
-            <form onSubmit={this.handleSearch}>
+            <form onSubmit={this.handleSearch} className="weather-app__form form">
                 <SearchInput listOfCities={this.props.listOfCities} handleSearch={this.props.handleSearch}/>
-                <button>Wyszukaj</button>
+                <button className="button button--search">Wyszukaj</button>
             </form>
         )
     }

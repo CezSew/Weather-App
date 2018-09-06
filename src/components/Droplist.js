@@ -19,9 +19,10 @@ export default class Droplist extends React.Component {
         let cities = this.props.cities;
         if(cities) {
             return (
-                <ul className="input__recommended-list" id="cities-list" >
+                <ul className="form__recommended-list recommended-list" id="cities-list" >
                     {cities.map((city, index)=>{
                         return <li 
+                        className="recommended-list__list-item"
                         value={city} 
                         key={index} 
                         onClick={
