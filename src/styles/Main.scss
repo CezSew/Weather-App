@@ -1,6 +1,13 @@
+@import "Header";
+
+
 $themeColor: #eeeeee;
 $breakPoint1: 1180px;
 $breakPoint2: 1050px;
+
+* {
+    box-sizing: border-box;
+}
 
 h1,h2,h3,h4,h5,h6,p {
     margin: 0;
@@ -24,11 +31,30 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+.input {
+    border: 1px solid #f4f4f4;
+    outline: none;
+}
+.input.input--text {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    font-size: 1em;
+}
+.input.input--text::placeholder {
+    color: #f1f1f1;
+}
 .button {
-
+    background-color: #fff;
+    background-color: transparent;
+    border: 0;
+    font-size: 0.7em;
+    cursor: pointer;
 }
 
-.button.button--submit {
-
+.button.button--search {
+    color: #333;
+    background-color: #eeeeee;
+    padding: 16px 25px;
+    font-size: 1em;
 }

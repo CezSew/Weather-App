@@ -2,19 +2,42 @@ $breakPoint1: 1180px;
 $breakPoint2: 1050px;
 
 .header {
+    padding-top: 80px;
     .container {
-        .weather-app__title {
+        display: flex;
+        justify-content: space-between;
+        .weather-app__title.title {
+            flex-basis: 33%;
             font-weight: 400;
-            font-size: 3em;
+            font-size: 2em;
+            position: relative;
+            display: inline-block;
+            .title__sub {
+                display: block;
+                font-size: 0.5em;
+                position: relative;
+                bottom: 0;
+                left: 6ch;
+            }
         }
         .weather-app__form.form {
+            flex-basis: 33%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
             .form__container {
+                position: relative;
                 .form__recommended-list.recommended-list {
+                    position: absolute;;
                     .recommended-list__list-item {
 
                     }
                 }
             }
+        }
+        .weather-app__information.information {
+            flex-basis: 33%;
         }
     }
 }
