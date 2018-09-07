@@ -35,7 +35,7 @@ export default class Droplist extends React.Component {
                 </ul>  
             );
         } else return (
-            <ul className="input__recommended-list" id="cities-list" >
+            <ul className="input__recommended-list hidden" id="cities-list" >
             </ul>  
             );
     }
