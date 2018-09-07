@@ -46,16 +46,29 @@ export default class WeatherData extends React.Component {
         }
     }
     render() {
-        if(this.props.isError) return null;
+        if(!this.props.isError) {
         return  (
             <section className="weather-data">
                 <div className="container">
+                    {this.props.typedCity ? <p className="weather-app__city"><b>{this.props.typedCity}, {this.props.country}</b></p> : ''}
                     <p className="weather-data__temperature">{this.props.temperature}</p>
                     <p className="weather-data__pressure">{this.props.pressure}</p>
                     <p className="weather-data__weather">{this.translateWeatherStatus(this.props.weather)}</p>
                 </div>
             </section>
         );
+        } else {
+            return  ( 
+            <section className="weather-data">
+                <div className="container">
+                    <p className="weather-app__city">Nie znaleziono miejscowości o nazwie <b>"{this.props.typedCity}"</b>, spróbuj ponownie!</p>
+                    <p className="weather-data__temperature">{this.props.temperature}</p>
+                    <p className="weather-data__pressure">{this.props.pressure}</p>
+                    <p className="weather-data__weather">{this.translateWeatherStatus(this.props.weather)}</p>
+                </div>
+            </section>
+            );
+        }
     }
 }
    

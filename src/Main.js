@@ -75,6 +75,8 @@ class Main extends React.Component {
                     handleSearch={this.handleSearch} 
                     listOfCities={this.state.data} />
                     <WeatherData 
+                    country={this.state.country} 
+                    typedCity={this.state.typedCity} 
                     pressure={this.state.pressure} 
                     weather={this.state.weather} 
                     temperature={this.state.temperature} 
