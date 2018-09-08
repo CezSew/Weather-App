@@ -4,9 +4,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        .weather-app__city.city {
+        .weather-data__city.city {
             width: 50%;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -14,6 +14,24 @@
             padding: 50px 0;
             .city__content {
                 display: inline-block;
+            }
+        }
+        .weather-data__data.data {
+            padding: 50px 20px;
+            width: 50%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .data__temperature {
+    
+            }
+            .data__pressure {
+    
+            }
+            .data__weather {
+    
             }
         }
     }

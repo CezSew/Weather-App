@@ -50,10 +50,14 @@ export default class WeatherData extends React.Component {
         return  (
             <section className="weather-data">
                 <div className="container">
-                    {this.props.typedCity ? <div className="weather-app__city city"><p className="city__content"><b>{this.props.typedCity}, {this.props.country}</b></p></div> : ''}
-                    <p className="weather-data__temperature">{this.props.temperature}</p>
-                    <p className="weather-data__pressure">{this.props.pressure}</p>
-                    <p className="weather-data__weather">{this.translateWeatherStatus(this.props.weather)}</p>
+                    {this.props.typedCity ? <div className="weather-data__city city"><p className="city__content"><b>{this.props.typedCity}, {this.props.country}</b></p></div> : ''}
+                    {this.props.typedCity ?
+                    <div className="weather-data__data data">
+                        <p className="data__temperature">{this.props.temperature}</p>
+                        <p className="data__pressure">{this.props.pressure}</p>
+                        <p className="data__weather">{this.translateWeatherStatus(this.props.weather)}</p>
+                    </div>
+                    : ''}
                 </div>
             </section>
         );
@@ -61,12 +65,9 @@ export default class WeatherData extends React.Component {
             return  ( 
             <section className="weather-data">
                 <div className="container">
-                    <div className="weather-app__city city">
+                    <div className="weather-data__city city">
                         <p className="city__content">Nie znaleziono miejscowości o nazwie <b>"{this.props.typedCity}"</b>, spróbuj ponownie!</p>
                     </div>
-                    <p className="weather-data__temperature">{this.props.temperature}</p>
-                    <p className="weather-data__pressure">{this.props.pressure}</p>
-                    <p className="weather-data__weather">{this.translateWeatherStatus(this.props.weather)}</p>
                 </div>
             </section>
             );
