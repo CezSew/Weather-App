@@ -5,14 +5,17 @@ export default class WeatherData extends React.Component {
     constructor(props) {
         super(props);
         this.translateWeatherStatus = this.translateWeatherStatus.bind(this);
+        this.state = {
+            icon: '',
+        }
     }
     translateWeatherStatus(weather) {
         if(weather==='clear sky') {
-            return "Bezchmurnie";
+            return ["clear","Bezchmurnie"];
         } else if (weather==='few clouds') {
             return "Niskie zachmurzenie";
         } else if (weather==='scattered clouds' || weather==='broken clouds' || weather==='overcast clouds') {
-            return "Umiarkowane zachmurzenie";
+            return ["broken-clouds", "Umiarkowane zachmurzenie"];
         } else if (weather==='mist') {
             return "Mgła";
         } else if (weather==='shower rain' || weather==='very heavy rain' || weather==='heavy intensity shower rain') {
@@ -47,15 +50,21 @@ export default class WeatherData extends React.Component {
     }
     render() {
         if(!this.props.isError) {
+        const weather = this.translateWeatherStatus(this.props.weather);
+        const icon = weather[0];
+        const weatherName = weather[1];
         return  (
             <section className="weather-data">
                 <div className="container">
                     {this.props.typedCity ? <div className="weather-data__city city"><p className="city__content"><b>{this.props.typedCity}, {this.props.country}</b></p></div> : ''}
                     {this.props.typedCity ?
                     <div className="weather-data__data data">
-                        <p className="data__temperature">{this.props.temperature}</p>
-                        <p className="data__pressure">{this.props.pressure}</p>
-                        <p className="data__weather">{this.translateWeatherStatus(this.props.weather)}</p>
+                        <div className={"data__icon " + icon}></div>
+                        <div className="data__info">
+                            <p className="data__temperature">{this.props.temperature}</p>
+                            <p className="data__pressure">{this.props.pressure}</p>
+                            <p className="data__weather">{weatherName}</p>
+                        </div>
                     </div>
                     : ''}
                 </div>
