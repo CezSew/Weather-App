@@ -49,7 +49,8 @@ body {
     font-size: 1em;
 }
 .input.input--text::placeholder {
-    color: #f1f1f1;
+    color: #666666;
+    opacity: 0.7;
 }
 .button {
     background-color: #fff;
@@ -68,4 +69,7 @@ body {
 
 .hidden {
     display: none;
+}
+.fade-out {
+    opacity: 0;
 }

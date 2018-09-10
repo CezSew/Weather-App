@@ -13,8 +13,17 @@
             background-color: #fff;
             padding: 50px 0;
             text-transform: capitalize;
+            opacity: 1;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            
             .city__content {
                 display: inline-block;
+            }
+        }
+        .weather-data__city.city.fade-out {
+            opacity: 0;
+            * {
+                display: none;
             }
         }
         .weather-data__data.data {
@@ -23,9 +32,12 @@
             background-color: #fff;
             display: flex;
             justify-content: center;
+            min-height: 200px;
+            opacity: 1;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
             .data__icon {
                 width: 50%;
-                background-size: 45%;
+                
                 background-position: 50%;
                 background-repeat: no-repeat;
             }
@@ -40,6 +52,12 @@
                 .data__weather {
         
                 }
+            }
+        }
+        .weather-data__data.data.fade-out {
+            opacity: 0;
+            * {
+                display: none;
             }
         }
     }

@@ -51,6 +51,7 @@ export default class SearchInput extends React.Component {
             <div className="form__container">
                 <input id="city-input" className="input input--text" onKeyUp={this.handleKeyUp} type="text" name="city" placeholder="Miasto" autoComplete="off"/> 
                 <Droplist 
+                animateDataBoxes={this.props.animateDataBoxes}
                 ref={(element) => this._list = element}
                 cities={cities} 
                 handleSearch={this.props.handleSearch}

@@ -9,23 +9,24 @@ export default class WeatherData extends React.Component {
             icon: '',
         }
     }
+
     translateWeatherStatus(weather) {
         if(weather==='clear sky') {
             return ["clear","Bezchmurnie"];
         } else if (weather==='few clouds') {
-            return "Niskie zachmurzenie";
+            return ["broken-clouds", "Niskie zachmurzenie"]; 
         } else if (weather==='scattered clouds' || weather==='broken clouds' || weather==='overcast clouds') {
             return ["broken-clouds", "Umiarkowane zachmurzenie"];
         } else if (weather==='mist') {
-            return "Mgła";
+            return ["foggy","Mgła"];
         } else if (weather==='shower rain' || weather==='very heavy rain' || weather==='heavy intensity shower rain') {
-            return "Ulewny deszcz";
+            return ["heavy-rain","Ulewny deszcz"];
         } else if (weather==='rain' || weather==='light intensity shower rain' || weather==='ragged shower rain') {
-            return "Deszcz";
+            return ["heavy-rain","Deszcz"];
         } else if (weather==='light rain') {
-            return "Mżawka";
+            return ["heavy-rain","Mżawka"];
         } else if (weather==='moderate rain') {
-            return "Umiarkowane opady deszczu";
+            return ["heavy-rain","Umiarkowane opady deszczu"]; 
         } else if (weather==='heavy intensity rain') {
             return "Intensywne opady deszczu";
         } else if (weather==='extreme rain') {
@@ -56,9 +57,8 @@ export default class WeatherData extends React.Component {
         return  (
             <section className="weather-data">
                 <div className="container">
-                    {this.props.typedCity ? <div className="weather-data__city city"><p className="city__content"><b>{this.props.typedCity}, {this.props.country}</b></p></div> : ''}
-                    {this.props.typedCity ?
-                    <div className="weather-data__data data">
+                    <div id="city" className={this.props.typedCity ? "weather-data__city city fade-in" : "weather-data__city city fade-out"} ><p className="city__content"><b>{this.props.typedCity ? this.props.typedCity + ', ' + this.props.country : ''}</b></p></div> 
+                    <div id="data" className={this.props.typedCity ? "weather-data__data data fade-in" : "weather-data__data data fade-out"}>
                         <div className={"data__icon " + icon}></div>
                         <div className="data__info">
                             <p className="data__temperature">{this.props.temperature}</p>
@@ -66,7 +66,6 @@ export default class WeatherData extends React.Component {
                             <p className="data__weather">{weatherName}</p>
                         </div>
                     </div>
-                    : ''}
                 </div>
             </section>
         );

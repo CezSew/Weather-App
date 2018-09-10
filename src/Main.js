@@ -11,6 +11,7 @@ class Main extends React.Component {
     constructor(props){
         super(props);
         this.handleSearch = this.handleSearch.bind(this);
+        this.animateDataBoxes = this.animateDataBoxes.bind(this);
         this.state = {
             weather: '',
             temperature: '',
@@ -31,6 +32,18 @@ class Main extends React.Component {
                 this.setState({ ready: true });
             }
         );  
+    }
+
+    animateDataBoxes() {
+        const city = document.getElementById('city');
+        const data = document.getElementById('data');
+        data.classList.add('fade-out');
+        city.classList.add('fade-out');
+        
+        setTimeout(function() {
+            data.classList.remove('fade-out');
+            city.classList.remove('fade-out');
+        }, 300)
     }
 
     handleSearch(city) {
@@ -73,7 +86,8 @@ class Main extends React.Component {
                     country={this.state.country} 
                     isError={this.state.error}
                     handleSearch={this.handleSearch} 
-                    listOfCities={this.state.data} />
+                    listOfCities={this.state.data}
+                    animateDataBoxes={this.animateDataBoxes} />
                     <WeatherData 
                     country={this.state.country} 
                     typedCity={this.state.typedCity} 

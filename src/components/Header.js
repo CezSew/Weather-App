@@ -12,6 +12,7 @@ export default class Header extends React.Component {
                             <h1 className="weather-app__title title">Weather App <span className="title__sub">powered by React</span></h1>
                         </a>
                         <SearchForm 
+                        animateDataBoxes={this.props.animateDataBoxes}
                         handleSearch={this.props.handleSearch} 
                         listOfCities={this.props.listOfCities} />
                         <div className="weather-app__information information"></div>
@@ -26,6 +27,7 @@ export default class Header extends React.Component {
                             <h1 className="weather-app__title title">Weather App <span className="title__sub">powered by React</span></h1>
                         </a>
                         <SearchForm 
+                        animateDataBoxes={this.props.animateDataBoxes}
                         handleSearch={this.props.handleSearch} 
                         listOfCities={this.props.listOfCities} />
                         <div className="weather-app__information information"></div>
