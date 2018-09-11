@@ -35,11 +35,13 @@ class Main extends React.Component {
     }
 
     animateDataBoxes() {
-        const city = document.getElementById('city');
-        const data = document.getElementById('data');
-        data.classList.add('fade-out');
-        city.classList.add('fade-out');
-        
+        const city = document.getElementsByClassName('city__content')[0];
+        const data = document.getElementsByClassName('data__info')[0];
+
+        setTimeout(function() {
+            data.classList.add('fade-out');
+            city.classList.add('fade-out');
+        }, 10)
         setTimeout(function() {
             data.classList.remove('fade-out');
             city.classList.remove('fade-out');

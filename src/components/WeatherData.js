@@ -54,16 +54,27 @@ export default class WeatherData extends React.Component {
         const weather = this.translateWeatherStatus(this.props.weather);
         const icon = weather[0];
         const weatherName = weather[1];
+        const loaded = this.props.typedCity;
         return  (
             <section className="weather-data">
                 <div className="container">
-                    <div id="city" className={this.props.typedCity ? "weather-data__city city fade-in" : "weather-data__city city fade-out"} ><p className="city__content"><b>{this.props.typedCity ? this.props.typedCity + ', ' + this.props.country : ''}</b></p></div> 
-                    <div id="data" className={this.props.typedCity ? "weather-data__data data fade-in" : "weather-data__data data fade-out"}>
+                    <div id="city" className="weather-data__city city">
+                        <p className={loaded ? "city__content fade-in" : "city__content fade-out"} >
+                            <b>{loaded ? this.props.typedCity + ', ' + this.props.country : ''}</b>
+                        </p>
+                    </div> 
+                    <div id="data" className="weather-data__data data">
                         <div className={"data__icon " + icon}></div>
                         <div className="data__info">
-                            <p className="data__temperature">{this.props.temperature}</p>
-                            <p className="data__pressure">{this.props.pressure}</p>
-                            <p className="data__weather">{weatherName}</p>
+                            <p className={loaded ? "data__temperature fade-in" : "data__temperature fade-out" }>
+                                {this.props.temperature}
+                            </p>
+                            <p className={loaded ? "data__pressure fade-in" : "data__pressure fade-out"}>
+                                {this.props.pressure}
+                            </p>
+                            <p className={loaded ? "data__weather fade-in" : "data__weather fade-out" }>
+                                {weatherName}
+                            </p>
                         </div>
                     </div>
                 </div>
