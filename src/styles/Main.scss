@@ -13,18 +13,10 @@
             background-color: #fff;
             padding: 50px 0;
             text-transform: capitalize;
-            
-            
-            
             .city__content {
                 display: inline-block;
-                opacity: 1;
                 transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
             }
-        }
-        .weather-data__city.city.fade-out {
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
         .weather-data__data.data {
             padding: 50px 20px;
@@ -43,21 +35,16 @@
                 width: 50%;
                 transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
                 .data__temperature {
-                    opacity: 1;
                 }
                 .data__pressure {
-                    opacity: 1;
+                }
+                .data__pressure.fade-out {
                 }
                 .data__weather {
-                    opacity: 1;
                 }
+               
             }
         }
-        .weather-data__data.data.fade-out {
-            opacity: 0;
-            * {
-                display: none;
-            }
-        }
+
     }
 }

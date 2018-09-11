@@ -9,6 +9,9 @@ export default class WeatherData extends React.Component {
             icon: '',
         }
     }
+    componentWillReceiveProps() {
+        this.props.animateDataBoxes();
+      }
 
     translateWeatherStatus(weather) {
         if(weather==='clear sky') {
@@ -59,20 +62,20 @@ export default class WeatherData extends React.Component {
             <section className="weather-data">
                 <div className="container">
                     <div id="city" className="weather-data__city city">
-                        <p className={loaded ? "city__content fade-in" : "city__content fade-out"} >
+                        <p className={loaded ? "city__content fade-out" : "city__content"} >
                             <b>{loaded ? this.props.typedCity + ', ' + this.props.country : ''}</b>
                         </p>
                     </div> 
                     <div id="data" className="weather-data__data data">
                         <div className={"data__icon " + icon}></div>
-                        <div className="data__info">
-                            <p className={loaded ? "data__temperature fade-in" : "data__temperature fade-out" }>
+                        <div className={loaded ? "data__info fade-out" : "data__info" }>
+                            <p className="data__temperature">
                                 {this.props.temperature}
                             </p>
-                            <p className={loaded ? "data__pressure fade-in" : "data__pressure fade-out"}>
+                            <p className="data__pressure ">
                                 {this.props.pressure}
                             </p>
-                            <p className={loaded ? "data__weather fade-in" : "data__weather fade-out" }>
+                            <p className="data__weather">
                                 {weatherName}
                             </p>
                         </div>

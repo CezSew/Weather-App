@@ -10,7 +10,7 @@ export default class Droplist extends React.Component {
         console.log("Did update");
     }
     handleClick(city) {
-        this.props.animateDataBoxes();
+        // this.props.animateDataBoxes();
         this.props.handleSearch(city);
         this.props.clearInput();
         this.props.clearList();

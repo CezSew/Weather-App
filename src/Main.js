@@ -39,10 +39,6 @@ class Main extends React.Component {
         const data = document.getElementsByClassName('data__info')[0];
 
         setTimeout(function() {
-            data.classList.add('fade-out');
-            city.classList.add('fade-out');
-        }, 10)
-        setTimeout(function() {
             data.classList.remove('fade-out');
             city.classList.remove('fade-out');
         }, 300)
@@ -69,6 +65,7 @@ class Main extends React.Component {
                 weather: weather,
                 country: country,
             });
+            this.animateDataBoxes();
         }).catch(error => {
             this.setState({error: true, typedCity: city});
         } );
@@ -96,7 +93,8 @@ class Main extends React.Component {
                     pressure={this.state.pressure} 
                     weather={this.state.weather} 
                     temperature={this.state.temperature} 
-                    isError={this.state.error} />
+                    isError={this.state.error}
+                    animateDataBoxes={this.animateDataBoxes} />
                 </main>
                 <Footer />
             </div>

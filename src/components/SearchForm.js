@@ -14,7 +14,7 @@ export default class Search extends React.Component {
         const city = e.target.elements.city.value.trim();
         e.target.elements.city.value = '';
         if(city){
-            this.props.animateDataBoxes();
+            // this.props.animateDataBoxes();
             this.props.handleSearch(city);
         }
     }
