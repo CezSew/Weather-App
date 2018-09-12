@@ -35,15 +35,22 @@ class Main extends React.Component {
     }
 
     animateDataBoxes() {
+        
         const city = document.getElementsByClassName('city__content')[0];
         const data = document.getElementsByClassName('data__info')[0];
-
-        setTimeout(function() {
-            data.classList.remove('fade-out');
-            city.classList.remove('fade-out');
-        }, 300)
+        if(city && data) {
+            data.classList.add('fade-out');
+            city.classList.add('fade-out');
+            setTimeout(function() {
+                data.classList.remove('fade-out');
+                city.classList.remove('fade-out');
+            }, 100)
+        }
+       
     }
-
+    componentWillUpdate() {
+        this.animateDataBoxes();
+    }
     handleSearch(city) {
         let APICallbackObject;
         const requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
@@ -65,7 +72,6 @@ class Main extends React.Component {
                 weather: weather,
                 country: country,
             });
-            this.animateDataBoxes();
         }).catch(error => {
             this.setState({error: true, typedCity: city});
         } );

@@ -15,7 +15,12 @@
             text-transform: capitalize;
             .city__content {
                 display: inline-block;
+                opacity: 1;
                 transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            }
+            .city__content.fade-out {
+                opacity: 0;
+                transition: none;
             }
         }
         .weather-data__data.data {
@@ -26,13 +31,19 @@
             justify-content: center;
             min-height: 200px;
             .data__icon {
+                opacity: 1;
                 width: 50%;
-                
+                transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
                 background-position: 50%;
                 background-repeat: no-repeat;
             }
+            .data__icon.fade-out {
+                opacity: 0;
+                transition: none;
+            }
             .data__info {
                 width: 50%;
+                opacity: 1;
                 transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
                 .data__temperature {
                 }
@@ -43,6 +54,10 @@
                 .data__weather {
                 }
                
+            }
+            .data__info.fade-out {
+                opacity: 0;
+                transition: none;
             }
         }
 

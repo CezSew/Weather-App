@@ -9,9 +9,6 @@ export default class WeatherData extends React.Component {
             icon: '',
         }
     }
-    componentWillReceiveProps() {
-        this.props.animateDataBoxes();
-      }
 
     translateWeatherStatus(weather) {
         if(weather==='clear sky') {
