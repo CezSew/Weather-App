@@ -24,6 +24,10 @@ class Main extends React.Component {
         };
     }
 
+    componentWillMount() {
+        this.getCities();
+    }
+
     getCities() {
         fetch('cities2.json')
         .then(results => results.json())
@@ -53,32 +57,36 @@ class Main extends React.Component {
 
     handleSearch(city) {
         let APICallbackObject;
+        const selectedCity = city;
         const requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
-        
         fetch(requestURL)
         .then(results => results.json())
         .then(data => APICallbackObject = data)
         .then(() => {
-            let temperatureInKelvins = APICallbackObject.list[0].main.temp;    
-            let temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
-            let pressure = APICallbackObject.list[0].main.pressure;
-            let weather = APICallbackObject.list[0].weather[0].description;
-            let country = APICallbackObject.city.country; 
-            this.setState({
-                temperature: temperatureInCelsius + ' ℃',
-                error: false,
-                typedCity: city,
-                pressure: pressure + ' hPa',
-                weather: weather,
-                country: country,
-            });
+            this.getCurrentWeather(APICallbackObject, city);
         }).catch(error => {
             this.setState({error: true, typedCity: city});
         } );
     }
     
-    componentWillMount() {
-        this.getCities();
+    getCurrentWeather(callback, city) {
+        const temperatureInKelvins = callback.list[0].main.temp;    
+        const temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
+        const pressure = callback.list[0].main.pressure;
+        const weather = callback.list[0].weather[0].description;
+        const country = callback.city.country; 
+        this.setState({
+            temperature: temperatureInCelsius + ' ℃',
+            error: false,
+            typedCity: city,
+            pressure: pressure + ' hPa',
+            weather: weather,
+            country: country,
+        });
+    }
+
+    getLastDays() {
+
     }
 
     render() {
