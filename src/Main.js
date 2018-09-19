@@ -35,7 +35,6 @@ class Main extends React.Component {
     }
 
     animateDataBoxes() {
-        
         const city = document.getElementsByClassName('city__content')[0];
         const data = document.getElementsByClassName('data__info')[0];
         if(city && data) {
@@ -46,11 +45,12 @@ class Main extends React.Component {
                 city.classList.remove('fade-out');
             }, 100)
         }
-       
     }
+
     componentWillUpdate() {
         this.animateDataBoxes();
     }
+
     handleSearch(city) {
         let APICallbackObject;
         const requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';

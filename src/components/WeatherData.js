@@ -5,9 +5,6 @@ export default class WeatherData extends React.Component {
     constructor(props) {
         super(props);
         this.translateWeatherStatus = this.translateWeatherStatus.bind(this);
-        this.state = {
-            icon: '',
-        }
     }
 
     translateWeatherStatus(weather) {
@@ -50,22 +47,22 @@ export default class WeatherData extends React.Component {
         }
     }
     render() {
+        console.log(this.props.typedCity);
         if(!this.props.isError) {
         const weather = this.translateWeatherStatus(this.props.weather);
         const icon = weather[0];
         const weatherName = weather[1];
-        const loaded = this.props.typedCity;
         return  (
-            <section className="weather-data">
+            <section className={weather ? "weather-data" : "hidden"}>
                 <div className="container">
                     <div id="city" className="weather-data__city city">
-                        <p className={loaded ? "city__content fade-out" : "city__content"} >
-                            <b>{loaded ? this.props.typedCity + ', ' + this.props.country : ''}</b>
+                        <p className="city__content">
+                            <b>{this.props.typedCity + ', ' + this.props.country}</b>
                         </p>
                     </div> 
                     <div id="data" className="weather-data__data data">
                         <div className={"data__icon " + icon}></div>
-                        <div className={loaded ? "data__info fade-out" : "data__info" }>
+                        <div className="data__info">
                             <p className="data__temperature">
                                 {this.props.temperature}
                             </p>
@@ -81,6 +78,7 @@ export default class WeatherData extends React.Component {
             </section>
         );
         } else {
+            
             return  ( 
             <section className="weather-data">
                 <div className="container">
