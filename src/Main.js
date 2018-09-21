@@ -64,6 +64,7 @@ class Main extends React.Component {
         .then(data => APICallbackObject = data)
         .then(() => {
             this.getCurrentWeather(APICallbackObject, city);
+            this.getNextDays(APICallbackObject);
         }).catch(error => {
             this.setState({error: true, typedCity: city});
         } );
@@ -85,9 +86,25 @@ class Main extends React.Component {
         });
     }
 
-    getLastDays() {
+    getNextDays(callback) {
+        const temperatureInKelvins = callback.list[8].main.temp;    
+        const temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
+        const pressure = callback.list[8].main.pressure;
+        const weather = callback.list[8].weather[0].description;
 
+        // this.setState({
+        //     temperatureNextDay: temperatureInCelsius + ' ℃',
+        //     pressureNextDay: pressure + ' hPa',
+        //     weatherNextDay: weather
+        // });
     }
+
+    /*
+    * TO DO:
+    * - single setState function
+    * - function calculating temperature
+    * - pressure change indicator
+    */
 
     render() {
         if(!this.state.ready) return null;
