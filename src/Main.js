@@ -13,14 +13,15 @@ class Main extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.animateDataBoxes = this.animateDataBoxes.bind(this);
         this.state = {
-            weather: '',
-            temperature: '',
-            data: null,
-            ready: false,
             error: false,
             typedCity: '',
             country: '',
-            pressure: '',
+            current_temperature: '',
+            current_pressure: '',
+            current_weather: '',
+            nextDay_temperature: '',
+            nextDay_pressure: '',
+            nextDay_weather: ''
         };
     }
 
@@ -63,42 +64,47 @@ class Main extends React.Component {
         .then(results => results.json())
         .then(data => APICallbackObject = data)
         .then(() => {
-            this.getCurrentWeather(APICallbackObject, city);
-            this.getNextDays(APICallbackObject);
+            const currentWeather = this.getCurrentWeather(APICallbackObject);
+            const nextDayWeather = this.getNextDay(APICallbackObject);
+            const country = APICallbackObject.city.country; 
+            this.setApplicationState(currentWeather, nextDayWeather, city, country);
         }).catch(error => {
             this.setState({error: true, typedCity: city});
         } );
     }
     
-    getCurrentWeather(callback, city) {
+    getCurrentWeather(callback) {
         const temperatureInKelvins = callback.list[0].main.temp;    
         const temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
         const pressure = callback.list[0].main.pressure;
         const weather = callback.list[0].weather[0].description;
-        const country = callback.city.country; 
-        this.setState({
-            temperature: temperatureInCelsius + ' ℃',
-            error: false,
-            typedCity: city,
-            pressure: pressure + ' hPa',
-            weather: weather,
-            country: country,
-        });
+
+        return {temperatureInCelsius, pressure, weather};
     }
 
-    getNextDays(callback) {
+    getNextDay(callback) {
         const temperatureInKelvins = callback.list[8].main.temp;    
         const temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
         const pressure = callback.list[8].main.pressure;
         const weather = callback.list[8].weather[0].description;
-
-        // this.setState({
-        //     temperatureNextDay: temperatureInCelsius + ' ℃',
-        //     pressureNextDay: pressure + ' hPa',
-        //     weatherNextDay: weather
-        // });
+        
+        return {temperatureInCelsius, pressure, weather};
     }
 
+    setApplicationState(currentWeather, nextDayWeather, city, country) {
+        console.log(country);
+        this.setState({
+            error: false,
+            typedCity: city,
+            country: country,
+            current_temperature: currentWeather.temperatureInCelsius + ' ℃',
+            current_pressure: currentWeather.pressure + ' hPa',
+            current_weather: currentWeather.weather,
+            nextDay_temperature: nextDayWeather.temperatureInCelsius + ' ℃',
+            nextDay_pressure: nextDayWeather.pressure + ' hPa',
+            nextDay_weather: nextDayWeather.weather
+        });
+    }
     /*
     * TO DO:
     * - single setState function
@@ -121,9 +127,9 @@ class Main extends React.Component {
                     <WeatherData 
                     country={this.state.country} 
                     typedCity={this.state.typedCity} 
-                    pressure={this.state.pressure} 
-                    weather={this.state.weather} 
-                    temperature={this.state.temperature} 
+                    pressure={this.state.current_pressure} 
+                    weather={this.state.current_weather} 
+                    temperature={this.state.current_temperature} 
                     isError={this.state.error}
                     animateDataBoxes={this.animateDataBoxes} />
                 </main>
