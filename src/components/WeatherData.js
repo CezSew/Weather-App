@@ -25,9 +25,9 @@ export default class WeatherData extends React.Component {
         } else if (weather==='moderate rain') {
             return ["heavy-rain","Umiarkowane opady deszczu"]; 
         } else if (weather==='heavy intensity rain') {
-            return "Intensywne opady deszczu";
+            return ["heavy-rain","Intensywne opady deszczu"];
         } else if (weather==='extreme rain') {
-            return "Ekstremalne opady deszczu";
+            return ["heavy-rain","Ekstremalne opady deszczu"];
         } else if (weather==='freezing rain') {
             return "Deszcz marznący";
         } else if (weather==='thunderstorm') {

@@ -67,6 +67,7 @@ class Main extends React.Component {
             const currentWeather = this.getCurrentWeather(APICallbackObject);
             const nextDayWeather = this.getNextDay(APICallbackObject);
             const country = APICallbackObject.city.country; 
+            console.log(APICallbackObject);
             this.setApplicationState(currentWeather, nextDayWeather, city, country);
         }).catch(error => {
             this.setState({error: true, typedCity: city});
