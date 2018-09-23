@@ -52,6 +52,12 @@ class Main extends React.Component {
         }
     }
 
+    convertToCelsius(kelvins) {
+        const celsius = Math.floor((kelvins - 273.15)*100)/100;
+
+        return celsius;
+    }
+
     componentWillUpdate() {
         this.animateDataBoxes();
     }
@@ -67,7 +73,6 @@ class Main extends React.Component {
             const currentWeather = this.getCurrentWeather(APICallbackObject);
             const nextDayWeather = this.getNextDay(APICallbackObject);
             const country = APICallbackObject.city.country; 
-            console.log(APICallbackObject);
             this.setApplicationState(currentWeather, nextDayWeather, city, country);
         }).catch(error => {
             this.setState({error: true, typedCity: city});
@@ -75,21 +80,19 @@ class Main extends React.Component {
     }
     
     getCurrentWeather(callback) {
-        const temperatureInKelvins = callback.list[0].main.temp;    
-        const temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
+        const temperature = this.convertToCelsius(callback.list[0].main.temp);
         const pressure = callback.list[0].main.pressure;
         const weather = callback.list[0].weather[0].description;
 
-        return {temperatureInCelsius, pressure, weather};
+        return {temperature, pressure, weather};
     }
 
     getNextDay(callback) {
-        const temperatureInKelvins = callback.list[8].main.temp;    
-        const temperatureInCelsius = Math.floor((temperatureInKelvins - 273.15)*100)/100;
+        const temperature = this.convertToCelsius(callback.list[8].main.temp);
         const pressure = callback.list[8].main.pressure;
         const weather = callback.list[8].weather[0].description;
         
-        return {temperatureInCelsius, pressure, weather};
+        return {temperature, pressure, weather};
     }
 
     setApplicationState(currentWeather, nextDayWeather, city, country) {
@@ -98,10 +101,10 @@ class Main extends React.Component {
             error: false,
             typedCity: city,
             country: country,
-            current_temperature: currentWeather.temperatureInCelsius + ' ℃',
+            current_temperature: currentWeather.temperature + ' ℃',
             current_pressure: currentWeather.pressure + ' hPa',
             current_weather: currentWeather.weather,
-            nextDay_temperature: nextDayWeather.temperatureInCelsius + ' ℃',
+            nextDay_temperature: nextDayWeather.temperature + ' ℃',
             nextDay_pressure: nextDayWeather.pressure + ' hPa',
             nextDay_weather: nextDayWeather.weather
         });
