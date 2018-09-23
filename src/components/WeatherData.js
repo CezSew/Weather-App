@@ -63,27 +63,35 @@ export default class WeatherData extends React.Component {
         return  (
             <section className={weather ? "weather-data" : "hidden"}>
                 <div className="container">
-                    <div id="city" className="weather-data__city city">
-                        <p className="city__content">
-                            <b>{this.props.typedCity + ', ' + this.props.country}</b>
-                        </p>
-                    </div> 
-                    <div id="data" className="weather-data__data data">
-                        <div className={"data__icon " + icon}></div>
-                        <div className="data__info">
-                            <p className="data__temperature">
-                                {this.props.temperature} 
+                    <div className="weather-data__next-day">
+
+                    </div>
+                    <div className="weather-data__current">
+                        <div id="city" className="weather-data__city city">
+                            <p className="city__content">
+                                <b>{this.props.typedCity + ', ' + this.props.country}</b>
                             </p>
-                            <p className="data__pressure ">
-                                {this.props.pressure}
-                                {(pressureTrend === 'Rising') ? 
-                                <span className='pressure-arrow pressure-arrow--rising'></span> : 
-                                <span className='pressure-arrow pressure-arrow--dropping'></span>}
-                            </p>
-                            <p className="data__weather">
-                                {weatherName}
-                            </p>
+                        </div> 
+                        <div id="data" className="weather-data__data data">
+                            <div className={"data__icon " + icon}></div>
+                            <div className="data__info">
+                                <p className="data__temperature">
+                                    {this.props.temperature} 
+                                </p>
+                                <p className="data__pressure ">
+                                    {this.props.pressure}
+                                    {(pressureTrend === 'Rising') ? 
+                                    <span className='pressure-arrow pressure-arrow--rising'></span> : 
+                                    <span className='pressure-arrow pressure-arrow--dropping'></span>}
+                                </p>
+                                <p className="data__weather">
+                                    {weatherName}
+                                </p>
+                            </div>
                         </div>
+                    </div>
+                    <div className="weather-data__next-hours">
+                    
                     </div>
                 </div>
             </section>
