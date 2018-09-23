@@ -118,7 +118,7 @@ class Main extends React.Component {
         if(!this.state.ready) return null;
         return (
             <div className="app">
-                <main className="weather-app">
+                <div className="weather-app">
                     <Header 
                     typedCity={this.state.typedCity} 
                     country={this.state.country} 
@@ -136,7 +136,7 @@ class Main extends React.Component {
                     temperature={this.state.current_temperature} 
                     isError={this.state.error}
                     animateDataBoxes={this.animateDataBoxes} />
-                </main>
+                </div>
                 <Footer />
             </div>
         );
