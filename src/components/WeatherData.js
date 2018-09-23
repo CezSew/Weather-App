@@ -6,7 +6,14 @@ export default class WeatherData extends React.Component {
         super(props);
         this.translateWeatherStatus = this.translateWeatherStatus.bind(this);
     }
-
+    getPressureTrend(nextDayPressure) {
+        const currentPressure = this.props.pressure;
+        if(nextDayPressure >= currentPressure) {
+            return "Rising";
+        } else {
+            return "Dropping";
+        }
+    }
     translateWeatherStatus(weather) {
         if(weather==='clear sky') {
             return ["clear","Bezchmurnie"];
@@ -52,6 +59,7 @@ export default class WeatherData extends React.Component {
         const weather = this.translateWeatherStatus(this.props.weather);
         const icon = weather[0];
         const weatherName = weather[1];
+        const pressureTrend = this.getPressureTrend(this.props.nextDay_pressure);
         return  (
             <section className={weather ? "weather-data" : "hidden"}>
                 <div className="container">
@@ -64,10 +72,13 @@ export default class WeatherData extends React.Component {
                         <div className={"data__icon " + icon}></div>
                         <div className="data__info">
                             <p className="data__temperature">
-                                {this.props.temperature}
+                                {this.props.temperature} 
                             </p>
                             <p className="data__pressure ">
                                 {this.props.pressure}
+                                {(pressureTrend === 'Rising') ? 
+                                <span className='pressure-arrow pressure-arrow--rising'></span> : 
+                                <span className='pressure-arrow pressure-arrow--dropping'></span>}
                             </p>
                             <p className="data__weather">
                                 {weatherName}

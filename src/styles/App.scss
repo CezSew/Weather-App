@@ -76,3 +76,51 @@ body {
 .hidden-vis {
     visibility: hidden;
 }
+.pressure-arrow {
+    margin-left: 15px;
+    background-size: cover;
+    width: 24px;
+    height: 19px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.pressure-arrow:after  {
+    content: '';
+    display: block;
+    position: absolute;
+    opacity: 0;
+    width:10px;
+    height: 10px;
+    top: 5px;
+    left:30px;
+    background-color: #fff;
+    border-left: 1px solid;
+    border-top: 1px solid;
+    transform: rotate(-45deg);
+    border-color: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+.pressure-arrow:before{
+    content: 'Zmiana ciśnienia w ciągu doby';
+    display: block;
+    opacity: 0;
+    position: absolute;
+    width: 100px;
+    top: 0px;
+    left: 35px;
+    background-color: #fff;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.2);
+    padding: 10px 0 10px 20px;
+    font-size: 0.8em;
+    pointer-events: none;
+}
+.pressure-arrow:hover:after, .pressure-arrow:hover:before {
+    opacity: 1;
+    transition: 0.3s all ease;
+}
+.pressure-arrow--dropping {
+    width: 23px;
+    height: 20px;
+}

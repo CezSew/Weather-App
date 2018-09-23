@@ -39,6 +39,47 @@ class Main extends React.Component {
         );  
     }
 
+    handleSearch(city) {
+        let APICallbackObject;
+        const selectedCity = city;
+        const requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
+        fetch(requestURL)
+        .then(results => results.json())
+        .then(data => APICallbackObject = data)
+        .then(() => {
+            const currentWeather = this.getCurrentWeather(APICallbackObject);
+            const nextDayWeather = this.getNextDay(APICallbackObject);
+            const country = APICallbackObject.city.country; 
+            this.setApplicationState(currentWeather, nextDayWeather, city, country);
+            console.log(APICallbackObject);
+        }).catch(error => {
+            this.setState({error: true, typedCity: city});
+        } );
+    }
+    
+    getCurrentWeather(callback) {
+        const temperature = this.convertToCelsius(callback.list[0].main.temp);
+        const pressure = callback.list[0].main.pressure;
+        const weather = callback.list[0].weather[0].description;
+        return {temperature, pressure, weather};
+    }
+
+    getNextDay(callback) {
+        const temperature = this.convertToCelsius(callback.list[8].main.temp);
+        const pressure = callback.list[8].main.pressure;
+        const weather = callback.list[8].weather[0].description;
+        return {temperature, pressure, weather};
+    }
+
+    convertToCelsius(kelvins) {
+        const celsius = Math.floor((kelvins - 273.15)*100)/100;
+        return celsius;
+    }
+
+    componentWillUpdate() {
+        this.animateDataBoxes();
+    }
+
     animateDataBoxes() {
         const city = document.getElementsByClassName('city__content')[0];
         const data = document.getElementsByClassName('data__info')[0];
@@ -52,55 +93,12 @@ class Main extends React.Component {
         }
     }
 
-    convertToCelsius(kelvins) {
-        const celsius = Math.floor((kelvins - 273.15)*100)/100;
-
-        return celsius;
-    }
-
-    componentWillUpdate() {
-        this.animateDataBoxes();
-    }
-
-    handleSearch(city) {
-        let APICallbackObject;
-        const selectedCity = city;
-        const requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
-        fetch(requestURL)
-        .then(results => results.json())
-        .then(data => APICallbackObject = data)
-        .then(() => {
-            const currentWeather = this.getCurrentWeather(APICallbackObject);
-            const nextDayWeather = this.getNextDay(APICallbackObject);
-            const country = APICallbackObject.city.country; 
-            this.setApplicationState(currentWeather, nextDayWeather, city, country);
-        }).catch(error => {
-            this.setState({error: true, typedCity: city});
-        } );
-    }
-    
-    getCurrentWeather(callback) {
-        const temperature = this.convertToCelsius(callback.list[0].main.temp);
-        const pressure = callback.list[0].main.pressure;
-        const weather = callback.list[0].weather[0].description;
-
-        return {temperature, pressure, weather};
-    }
-
-    getNextDay(callback) {
-        const temperature = this.convertToCelsius(callback.list[8].main.temp);
-        const pressure = callback.list[8].main.pressure;
-        const weather = callback.list[8].weather[0].description;
-        
-        return {temperature, pressure, weather};
-    }
-
     setApplicationState(currentWeather, nextDayWeather, city, country) {
-        console.log(country);
         this.setState({
             error: false,
             typedCity: city,
             country: country,
+            time: currentWeather.time,
             current_temperature: currentWeather.temperature + ' ℃',
             current_pressure: currentWeather.pressure + ' hPa',
             current_weather: currentWeather.weather,
@@ -128,10 +126,12 @@ class Main extends React.Component {
                     handleSearch={this.handleSearch} 
                     listOfCities={this.state.data}
                     animateDataBoxes={this.animateDataBoxes} />
+                    
                     <WeatherData 
                     country={this.state.country} 
                     typedCity={this.state.typedCity} 
                     pressure={this.state.current_pressure} 
+                    nextDay_pressure={this.state.nextDay_pressure}
                     weather={this.state.current_weather} 
                     temperature={this.state.current_temperature} 
                     isError={this.state.error}
