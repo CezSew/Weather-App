@@ -63,8 +63,16 @@ export default class WeatherData extends React.Component {
         return  (
             <section className={weather ? "weather-data" : "hidden"}>
                 <div className="container">
-                    <aside className="weather-data__next-day">
-
+                    <aside className="weather-data__next-days">
+                        {this.props.day_2_temperature} <br />
+                        {this.props.day_2_pressure} <br />
+                        {this.props.day_2_weather} <br /><br />
+                        {this.props.day_3_temperature} <br />
+                        {this.props.day_3_pressure} <br />
+                        {this.props.day_3_weather} <br /><br />
+                        {this.props.day_4_temperature} <br />
+                        {this.props.day_4_pressure} <br />
+                        {this.props.day_4_weather} <br /><br />
                     </aside>
                     <main className="weather-data__current">
                         <div id="city" className="weather-data__city city">
