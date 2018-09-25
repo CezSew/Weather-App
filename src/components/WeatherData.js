@@ -60,19 +60,25 @@ export default class WeatherData extends React.Component {
         const icon = weather[0];
         const weatherName = weather[1];
         const pressureTrend = this.getPressureTrend(this.props.nextDay_pressure);
+        const day_2 = {temperature: this.props.day_2_temperature, pressure: this.props.day_2_pressure, weather: this.props.day_2_weather};
+        const day_3 = {temperature: this.props.day_3_temperature, pressure: this.props.day_3_pressure, weather: this.props.day_3_weather};
+        const day_4 = {temperature: this.props.day_4_temperature, pressure: this.props.day_4_pressure, weather: this.props.day_4_weather};
         return  (
             <section className={weather ? "weather-data" : "hidden"}>
                 <div className="container">
                     <aside className="weather-data__next-days">
-                        {this.props.day_2_temperature} <br />
-                        {this.props.day_2_pressure} <br />
-                        {this.props.day_2_weather} <br /><br />
-                        {this.props.day_3_temperature} <br />
-                        {this.props.day_3_pressure} <br />
-                        {this.props.day_3_weather} <br /><br />
-                        {this.props.day_4_temperature} <br />
-                        {this.props.day_4_pressure} <br />
-                        {this.props.day_4_weather} <br /><br />
+                        <p class="weather-data__day-title">Jutro:</p>
+                        {day_2.temperature} <br />
+                        {day_2.pressure} <br />
+                        {this.translateWeatherStatus(day_2.weather)[1]} <br /><br />
+                        <p class="weather-data__day-title">Pojutrze:</p>
+                        {day_3.temperature} <br />
+                        {day_3.pressure} <br />
+                        {this.translateWeatherStatus(day_3.weather)[1]} <br /><br />
+                        <p class="weather-data__day-title">Za trzy dni:</p>
+                        {day_4.temperature} <br />
+                        {day_4.pressure} <br />
+                        {this.translateWeatherStatus(day_4.weather)[1]} <br /><br />
                     </aside>
                     <main className="weather-data__current">
                         <div id="city" className="weather-data__city city">
