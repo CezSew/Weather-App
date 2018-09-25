@@ -3,9 +3,26 @@
     .container {
         display: flex;
         justify-content: space-between;
-        .weather-data__next-days {
+        .weather-data__next-days.next-days {
             flex-basis: 28%;
             background-color: #fff;
+        }
+        .next-days {
+            &__title {
+                background-color: #f9f9f9;
+                width: 100%;
+                padding: 15px;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+            &__weather {
+                margin-bottom: 20px;
+                padding: 0 15px;
+                text-align: center;
+                &:last-child {
+                    margin: 0;
+                }
+            }
         }
         .weather-data__next-hours {
             flex-basis: 28%;
