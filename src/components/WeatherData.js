@@ -54,15 +54,16 @@ export default class WeatherData extends React.Component {
         }
     }
     render() {
-        console.log(this.props.typedCity);
+        
         if(!this.props.isError) {
-        const weather = this.translateWeatherStatus(this.props.weather);
-        const icon = weather[0];
-        const weatherName = weather[1];
-        const pressureTrend = this.getPressureTrend(this.props.nextDay_pressure);
-        const day_2 = {temperature: this.props.day_2_temperature, pressure: this.props.day_2_pressure, weather: this.props.day_2_weather};
-        const day_3 = {temperature: this.props.day_3_temperature, pressure: this.props.day_3_pressure, weather: this.props.day_3_weather};
-        const day_4 = {temperature: this.props.day_4_temperature, pressure: this.props.day_4_pressure, weather: this.props.day_4_weather};
+            const current = {temperature: this.props.current.temperature, pressure: this.props.current.pressure, weather: this.props.current.weather};
+            const day_2 = {temperature: this.props.days.day_2.temperature, pressure: this.props.days.day_2.pressure, weather: this.props.days.day_2.weather};
+            const day_3 = {temperature: this.props.days.day_3.temperature, pressure: this.props.days.day_3.pressure, weather: this.props.days.day_3.weather};
+            const day_4 = {temperature: this.props.days.day_4.temperature, pressure: this.props.days.day_4.pressure, weather: this.props.days.day_4.weather};
+            const weather = this.translateWeatherStatus(current.weather);
+            const icon = weather[0];
+            const weatherName = weather[1];
+            const pressureTrend = this.getPressureTrend(this.props.nextDay_pressure);
         return  (
             <section className={weather ? "weather-data" : "hidden"}>
                 <div className="container">
@@ -96,10 +97,10 @@ export default class WeatherData extends React.Component {
                             <div className={"data__icon " + icon}></div>
                             <div className="data__info">
                                 <p className="data__temperature">
-                                    {this.props.temperature} 
+                                    {current.temperature} 
                                 </p>
                                 <p className="data__pressure ">
-                                    {this.props.pressure}
+                                    {current.pressure}
                                     {(pressureTrend === 'Rising') ? 
                                     <span className='pressure-arrow pressure-arrow--rising'></span> : 
                                     <span className='pressure-arrow pressure-arrow--dropping'></span>}

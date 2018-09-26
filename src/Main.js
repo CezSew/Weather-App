@@ -16,18 +16,28 @@ class Main extends React.Component {
             error: false,
             typedCity: '',
             country: '',
-            current_temperature: '',
-            current_pressure: '',
-            current_weather: '',
-            day_2_temperature: '',
-            day_2_pressure: '',
-            day_2_weather: '',
-            day_3_temperature: '',
-            day_3_pressure: '',
-            day_3_weather: '',
-            day_4_temperature: '',
-            day_4_pressure: '',
-            day_4_weather: ''
+            current: { 
+                temperature: '',
+                pressure: '',
+                weather: '',
+            },
+            days: {
+                day_2: {
+                    temperature: '',
+                    pressure: '',
+                    weather: '',
+                },
+                day_3: {
+                    temperature: '',
+                    pressure: '',
+                    weather: '',
+                },
+                day_4: {
+                    temperature: '',
+                    pressure: '',
+                    weather: '',
+                },
+            }
         };
     }
 
@@ -54,7 +64,7 @@ class Main extends React.Component {
         .then(data => APICallbackObject = data)
         .then(() => {
             const currentWeather = this.getCurrentWeather(APICallbackObject);
-            const nextDaysWeather = this.getThreeDays(APICallbackObject);
+            const nextDaysWeather = this.getNextDays(APICallbackObject);
             const country = APICallbackObject.city.country; 
             this.setApplicationState(currentWeather, nextDaysWeather, city, country);
             console.log(APICallbackObject);
@@ -70,7 +80,7 @@ class Main extends React.Component {
         return {temperature, pressure, weather};
     }
 
-    getThreeDays(callback) {
+    getNextDays(callback) {
         const temperature = [
             this.convertToCelsius(callback.list[8].main.temp),
             this.convertToCelsius(callback.list[16].main.temp),
@@ -87,6 +97,10 @@ class Main extends React.Component {
             callback.list[24].weather[0].description
         ];
         return {temperature, pressure, weather};
+    }
+
+    getNextHours(callback) {
+
     }
 
     convertToCelsius(kelvins) {
@@ -117,18 +131,28 @@ class Main extends React.Component {
             typedCity: city,
             country: country,
             time: currentWeather.time,
-            current_temperature: currentWeather.temperature + ' ℃',
-            current_pressure: currentWeather.pressure + ' hPa',
-            current_weather: currentWeather.weather,
-            day_2_temperature: nextDaysWeather.temperature[0] + ' ℃',
-            day_2_pressure: nextDaysWeather.pressure[0] + ' hPa',
-            day_2_weather: nextDaysWeather.weather[0],
-            day_3_temperature: nextDaysWeather.temperature[1] + ' ℃',
-            day_3_pressure: nextDaysWeather.pressure[1] + ' hPa',
-            day_3_weather: nextDaysWeather.weather[1],
-            day_4_temperature: nextDaysWeather.temperature[2] + ' ℃',
-            day_4_pressure: nextDaysWeather.pressure[2] + ' hPa',
-            day_4_weather: nextDaysWeather.weather[2],
+            current: {
+                temperature: currentWeather.temperature + ' ℃',
+                pressure: currentWeather.pressure + ' hPa',
+                weather: currentWeather.weather,
+            },
+            days: {
+                day_2: {
+                    temperature: nextDaysWeather.temperature[0] + ' ℃',
+                    pressure: nextDaysWeather.pressure[0] + ' hPa',
+                    weather: nextDaysWeather.weather[0],
+                },
+                day_3: {
+                    temperature: nextDaysWeather.temperature[1] + ' ℃',
+                    pressure: nextDaysWeather.pressure[1] + ' hPa',
+                    weather: nextDaysWeather.weather[1],
+                },
+                day_4: {
+                    temperature: nextDaysWeather.temperature[2] + ' ℃',
+                    pressure: nextDaysWeather.pressure[2] + ' hPa',
+                    weather: nextDaysWeather.weather[2],
+                }
+            }
         });
     }
     /*
@@ -154,20 +178,10 @@ class Main extends React.Component {
                     <WeatherData 
                     country={this.state.country} 
                     typedCity={this.state.typedCity} 
-                    pressure={this.state.current_pressure} 
-                    weather={this.state.current_weather} 
-                    temperature={this.state.current_temperature} 
+                    current={this.state.current}
                     isError={this.state.error}
                     animateDataBoxes={this.animateDataBoxes} 
-                    day_2_pressure={this.state.day_2_pressure}
-                    day_2_temperature={this.state.day_2_temperature}
-                    day_2_weather={this.state.day_2_weather}
-                    day_3_pressure={this.state.day_3_pressure}
-                    day_3_temperature={this.state.day_3_temperature}
-                    day_3_weather={this.state.day_3_weather}
-                    day_4_pressure={this.state.day_4_pressure}
-                    day_4_temperature={this.state.day_4_temperature}
-                    day_4_weather={this.state.day_4_weather}
+                    days={this.state.days}
                     />
                 </div>
                 <Footer />
