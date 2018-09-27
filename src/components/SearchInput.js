@@ -18,7 +18,6 @@ export default class SearchInput extends React.Component {
     }
     
     clearInput() {
-        // do it by ref
         document.getElementById("city-input").value = '';
     }
 

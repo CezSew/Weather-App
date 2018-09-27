@@ -60,11 +60,13 @@ body {
     cursor: pointer;
 }
 
-.button.button--search {
+.button { 
+    &--search {
     color: #333;
     background-color: #eeeeee;
     padding: 16px 25px;
     font-size: 1em;
+    }
 }
 
 .hidden {

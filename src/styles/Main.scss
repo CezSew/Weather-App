@@ -3,93 +3,87 @@
     .container {
         display: flex;
         justify-content: space-between;
-        .weather-data__next-days.next-days {
-            flex-basis: 28%;
-            background-color: #fff;
+    }
+    &__next-days.next-days {
+        flex-basis: 28%;
+        background-color: #fff;
+    }
+    .next-days {
+        &__title {
+            background-color: #f9f9f9;
+            width: 100%;
+            padding: 15px;
+            font-weight: 700;
+            margin-bottom: 20px;
         }
-        .next-days {
-            &__title {
-                background-color: #f9f9f9;
-                width: 100%;
-                padding: 15px;
-                font-weight: 700;
-                margin-bottom: 20px;
-            }
-            &__weather {
-                margin-bottom: 20px;
-                padding: 0 15px;
-                text-align: center;
-                &:last-child {
-                    margin: 0;
-                }
-            }
-        }
-        .weather-data__next-hours {
-            flex-basis: 28%;
-            background-color: #fff;
-        }
-        .weather-data__current {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-basis: 40%;
-            .weather-data__city.city {
-                width: 100%;
-                margin-bottom: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: #fff;
-                padding: 50px 0;
-                text-transform: capitalize;
-                .city__content {
-                    display: inline-block;
-                    opacity: 1;
-                    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-                }
-                .city__content.fade-out {
-                    opacity: 0;
-                    transition: none;
-                }
-            }
-            .weather-data__data.data {
-                padding: 50px 20px;
-                width: 100%;
-                background-color: #fff;
-                display: flex;
-                justify-content: center;
-                min-height: 200px;
-                .data__icon {
-                    opacity: 1;
-                    width: 50%;
-                    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-                    background-position: 50%;
-                    background-repeat: no-repeat;
-                }
-                .data__icon.fade-out {
-                    opacity: 0;
-                    transition: none;
-                }
-                .data__info {
-                    width: 50%;
-                    opacity: 1;
-                    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-                    .data__temperature {
-                    }
-                    .data__pressure {
-                    }
-                    .data__pressure.fade-out {
-                    }
-                    .data__weather {
-                    }
-                
-                }
-                .data__info.fade-out {
-                    opacity: 0;
-                    transition: none;
-                }
+        &__weather {
+            margin-bottom: 20px;
+            padding: 0 15px;
+            text-align: center;
+            &:last-child {
+                margin: 0;
             }
         }
-
+    }
+    &__next-hours {
+        flex-basis: 28%;
+        background-color: #fff;
+    }
+    &__current {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-basis: 40%;
+    }
+    &__data.data {
+        padding: 50px 20px;
+        width: 100%;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        min-height: 200px;
+    }
+    .data {
+        &__icon {
+            opacity: 1;
+            width: 50%;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            background-position: 50%;
+            background-repeat: no-repeat;
+        }
+        &__icon.fade-out {
+            opacity: 0;
+            transition: none;
+        }
+        &__info {
+            width: 50%;
+            opacity: 1;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        &__info.fade-out {
+            opacity: 0;
+            transition: none;
+        }
+    }
+    &__city.city {
+        width: 100%;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        padding: 50px 0;
+        text-transform: capitalize;
+    }
+    .city {
+        &__content {
+            display: inline-block;
+            opacity: 1;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        &__content.fade-out {
+            opacity: 0;
+            transition: none;
+        }
     }
 }

@@ -8,14 +8,14 @@ export default class Header extends React.Component {
             return  (
                 <header className="header">
                     <div className="container">
-                        <a href="#" className="weather-app__logo">
-                            <h1 className="weather-app__title title">Weather App <span className="title__sub">powered by React</span></h1>
+                        <a href="#" className="header__logo">
+                            <h1 className="header__title title">Weather App <span className="title__sub">powered by React</span></h1>
                         </a>
                         <SearchForm 
                         animateDataBoxes={this.props.animateDataBoxes}
                         handleSearch={this.props.handleSearch} 
                         listOfCities={this.props.listOfCities} />
-                        <div className="weather-app__information information"></div>
+                        <div className="header__information information"></div>
                     </div>
                 </header>
             );
@@ -23,14 +23,14 @@ export default class Header extends React.Component {
             return  (
                 <header className="header"> 
                     <div className="container">
-                        <a href="#" className="weather-app__logo">
-                            <h1 className="weather-app__title title">Weather App <span className="title__sub">powered by React</span></h1>
+                        <a href="#" className="header__logo">
+                            <h1 className="header__title title">Weather App <span className="title__sub">powered by React</span></h1>
                         </a>
                         <SearchForm 
                         animateDataBoxes={this.props.animateDataBoxes}
                         handleSearch={this.props.handleSearch} 
                         listOfCities={this.props.listOfCities} />
-                        <div className="weather-app__information information"></div>
+                        <div className="header__information information"></div>
                     </div>
                 </header>
             );

@@ -6,52 +6,50 @@ $breakPoint2: 1050px;
     .container {
         display: flex;
         justify-content: space-between;
-        .weather-app__logo {
-            flex-basis: 33%;
-            .weather-app__title.title {
-                
-                font-weight: 400;
-                font-size: 2em;
-                position: relative;
-                display: inline-block;
-                .title__sub {
-                    display: block;
-                    font-size: 0.5em;
-                    position: relative;
-                    bottom: 0;
-                    left: 6ch;
-                }
-            }
-        }
-       
-        .weather-app__form.form {
-            flex-basis: 33%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    }
+    &__logo {
+        flex-basis: 33%;
+    }
+    &__title.title {
+        font-weight: 400;
+        font-size: 2em;
+        position: relative;
+        display: inline-block;
+        .title__sub {
+            display: block;
+            font-size: 0.5em;
             position: relative;
-            .form__container {
-                position: relative;
-                .form__recommended-list.recommended-list {
-                    position: absolute;
-                    list-style: none;
-                    padding: 0;
+            bottom: 0;
+            left: 6ch;
+        }
+    }
+    &__form.form {
+        flex-basis: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .form__container {
+            position: relative;
+            .form__recommended-list.recommended-list {
+                position: absolute;
+                list-style: none;
+                padding: 0;
+                width: 100%;
+                margin: 0;
+                .recommended-list__list-item {
                     width: 100%;
-                    margin: 0;
-                    .recommended-list__list-item {
-                        width: 100%;
-                        padding: 15px;
-                        border: 1px solid #f4f4f4;
-                        border-top: 0;
-                        background-color: #fff;
-                        cursor: pointer;
-                    }
+                    padding: 15px;
+                    border: 1px solid #f4f4f4;
+                    border-top: 0;
+                    background-color: #fff;
+                    cursor: pointer;
                 }
             }
         }
-        .weather-app__information.information {
-            flex-basis: 33%;
-        }
+    }
+    &__information.information {
+        flex-basis: 33%;
     }
 }
 
