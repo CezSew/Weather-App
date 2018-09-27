@@ -59,20 +59,28 @@ class Main extends React.Component {
         let APICallbackObject;
         const selectedCity = city;
         const requestURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=a5d803bdbb963adcf81a3a6444580326';
+        this.showLoader();
         fetch(requestURL)
         .then(results => results.json())
         .then(data => APICallbackObject = data)
         .then(() => {
+            this.showLoader();
             const currentWeather = this.getCurrentWeather(APICallbackObject);
             const nextDaysWeather = this.getNextDays(APICallbackObject);
             const country = APICallbackObject.city.country; 
+
             this.setApplicationState(currentWeather, nextDaysWeather, city, country);
-            console.log(APICallbackObject);
+
         }).catch(error => {
             this.setState({error: true, typedCity: city});
         } );
     }
     
+    showLoader() {
+        var loader = document.getElementsByClassName('loader');
+        loader[0].classList.toggle('hidden');
+    }
+
     getCurrentWeather(callback) {
         const temperature = this.convertToCelsius(callback.list[0].main.temp);
         const pressure = callback.list[0].main.pressure;
@@ -155,17 +163,12 @@ class Main extends React.Component {
             }
         });
     }
-    /*
-    * TO DO:
-    * - single setState function
-    * - function calculating temperature
-    * - pressure change indicator
-    */
 
     render() {
         if(!this.state.ready) return null;
         return (
             <div className="app">
+                <div className="loader hidden"></div>
                 <div className="weather-app">
                     <Header 
                     typedCity={this.state.typedCity} 
@@ -174,7 +177,7 @@ class Main extends React.Component {
                     handleSearch={this.handleSearch} 
                     listOfCities={this.state.data}
                     animateDataBoxes={this.animateDataBoxes} />
-                    
+                
                     <WeatherData 
                     country={this.state.country} 
                     typedCity={this.state.typedCity} 

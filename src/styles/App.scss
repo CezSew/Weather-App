@@ -126,3 +126,12 @@ body {
     width: 23px;
     height: 20px;
 }
+.loader {
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 50px;
+    left: 50px;
+}
