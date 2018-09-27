@@ -22,10 +22,6 @@
             text-align: center;
             display: flex;
             flex-wrap: wrap;
-
-            &:last-child {
-                margin: 0;
-            }
         }
         &__data {
             width: 50%;
