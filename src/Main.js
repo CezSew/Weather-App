@@ -67,6 +67,8 @@ class Main extends React.Component {
             this.showLoader();
             const currentWeather = this.getCurrentWeather(APICallbackObject);
             const nextDaysWeather = this.getNextDays(APICallbackObject);
+            const nextHoursWeather = this.getNextHours(APICallbackObject);
+            console.log(nextHoursWeather);
             const country = APICallbackObject.city.country; 
 
             this.setApplicationState(currentWeather, nextDaysWeather, city, country);
@@ -108,7 +110,27 @@ class Main extends React.Component {
     }
 
     getNextHours(callback) {
-
+        const hours = {
+            nextThreeHours: {
+                time: callback.list[1].dt_txt,
+                weather: callback.list[1].weather[0].description,
+                pressure: callback.list[1].main.pressure,
+                temperature: this.convertToCelsius(callback.list[1].main.temp)
+            },
+            nextSixHours: {
+                time: callback.list[2].dt_txt,
+                weather: callback.list[2].weather[0].description,
+                pressure: callback.list[2].main.pressure,
+                temperature: this.convertToCelsius(callback.list[2].main.temp)
+            },
+            nextNineHours: {
+                time: callback.list[3].dt_txt,
+                weather: callback.list[3].weather[0].description,
+                pressure: callback.list[3].main.pressure,
+                temperature: this.convertToCelsius(callback.list[3].main.temp)
+            }
+        };
+        return hours;
     }
 
     convertToCelsius(kelvins) {
