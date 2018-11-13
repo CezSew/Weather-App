@@ -37,6 +37,26 @@ class Main extends React.Component {
                     pressure: '',
                     weather: '',
                 },
+            },
+            hours: {
+                nextThreeHours: {
+                    time: '',
+                    weather: '',
+                    pressure: '',
+                    temperature: ''
+                },
+                nextSixHours: {
+                    time: '',
+                    weather: '',
+                    pressure: '',
+                    temperature: ''
+                },
+                nextNineHours: {
+                    time: '',
+                    weather: '',
+                    pressure: '',
+                    temperature: ''
+                }
             }
         };
     }
@@ -68,10 +88,9 @@ class Main extends React.Component {
             const currentWeather = this.getCurrentWeather(APICallbackObject);
             const nextDaysWeather = this.getNextDays(APICallbackObject);
             const nextHoursWeather = this.getNextHours(APICallbackObject);
-            console.log(nextHoursWeather);
             const country = APICallbackObject.city.country; 
 
-            this.setApplicationState(currentWeather, nextDaysWeather, city, country);
+            this.setApplicationState(currentWeather, nextDaysWeather, city, country, nextHoursWeather);
 
         }).catch(error => {
             this.setState({error: true, typedCity: city});
@@ -155,7 +174,7 @@ class Main extends React.Component {
         }
     }
 
-    setApplicationState(currentWeather, nextDaysWeather, city, country) {
+    setApplicationState(currentWeather, nextDaysWeather, city, country, nextHoursWeather) {
         this.setState({
             error: false,
             typedCity: city,
@@ -182,7 +201,8 @@ class Main extends React.Component {
                     pressure: nextDaysWeather.pressure[2] + ' hPa',
                     weather: nextDaysWeather.weather[2],
                 }
-            }
+            },
+            hours: nextHoursWeather
         });
     }
 
@@ -207,6 +227,7 @@ class Main extends React.Component {
                     isError={this.state.error}
                     animateDataBoxes={this.animateDataBoxes} 
                     days={this.state.days}
+                    nextHours={this.state.hours}
                     />
                 </div>
                 <Footer />

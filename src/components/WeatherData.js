@@ -28,7 +28,7 @@ export default class WeatherData extends React.Component {
         } else if (weather==='rain' || weather==='light intensity shower rain' || weather==='ragged shower rain') {
             return ["heavy-rain","Deszcz"];
         } else if (weather==='light rain') {
-            return ["heavy-rain","Mżawka"];
+            return ["heavy-rain","Lekki deszcz"];
         } else if (weather==='moderate rain') {
             return ["heavy-rain","Umiarkowane opady deszczu"]; 
         } else if (weather==='heavy intensity rain') {
@@ -60,6 +60,7 @@ export default class WeatherData extends React.Component {
             const day_2 = {temperature: this.props.days.day_2.temperature, pressure: this.props.days.day_2.pressure, weather: this.props.days.day_2.weather};
             const day_3 = {temperature: this.props.days.day_3.temperature, pressure: this.props.days.day_3.pressure, weather: this.props.days.day_3.weather};
             const day_4 = {temperature: this.props.days.day_4.temperature, pressure: this.props.days.day_4.pressure, weather: this.props.days.day_4.weather};
+            const hours = this.props.nextHours;
             const weather = this.translateWeatherStatus(current.weather);
             const icon = weather[0];
             const weatherName = weather[1];
@@ -67,37 +68,37 @@ export default class WeatherData extends React.Component {
         return  (
             <section className={weather ? "weather-data" : "hidden"}>
                 <div className="container">
-                    <aside className="weather-data__next-days next-days">
-                        <h3 className="next-days__title">Jutro:</h3>
-                        <div className="next-days__weather">
-                            <div className="next-days__data">
+                    <aside className="weather-data__next next">
+                        <h3 className="next__title">Jutro:</h3>
+                        <div className="next__weather">
+                            <div className="next__data">
                                 {day_2.temperature} <br />
                                 {day_2.pressure} <br />
                             </div>
-                            <div className={"next-days__icon " + this.translateWeatherStatus(day_2.weather)[0]}></div>
-                            <div className="next-days__weather-name">
+                            <div className={"next__icon " + this.translateWeatherStatus(day_2.weather)[0]}></div>
+                            <div className="next__weather-name">
                                 {this.translateWeatherStatus(day_2.weather)[1]}
                             </div>
                         </div>
-                        <h3 className="next-days__title">Pojutrze:</h3>
-                        <div className="next-days__weather">
-                            <div className="next-days__data">
+                        <h3 className="next__title">Pojutrze:</h3>
+                        <div className="next__weather">
+                            <div className="next__data">
                                 {day_3.temperature} <br />
                                 {day_3.pressure} <br />
                             </div>
-                            <div className={"next-days__icon " + this.translateWeatherStatus(day_3.weather)[0]}></div>
-                            <div className="next-days__weather-name">
+                            <div className={"next__icon " + this.translateWeatherStatus(day_3.weather)[0]}></div>
+                            <div className="next__weather-name">
                                 {this.translateWeatherStatus(day_3.weather)[1]}
                             </div>
                         </div>
-                        <h3 className="next-days__title">Za trzy dni:</h3>
-                        <div className="next-days__weather">
-                            <div className="next-days__data">
+                        <h3 className="next__title">Za trzy dni:</h3>
+                        <div className="next__weather">
+                            <div className="next__data">
                                 {day_4.temperature} <br />
                                 {day_4.pressure} <br />
                             </div>
-                            <div className={"next-days__icon " + this.translateWeatherStatus(day_4.weather)[0]}></div>
-                            <div className="next-days__weather-name">
+                            <div className={"next__icon " + this.translateWeatherStatus(day_4.weather)[0]}></div>
+                            <div className="next__weather-name">
                                 {this.translateWeatherStatus(day_4.weather)[1]}
                             </div>
                         </div>
@@ -127,7 +128,39 @@ export default class WeatherData extends React.Component {
                         </div>
                     </main>
                     <aside className="weather-data__next-hours">
-                    
+                        <p className="next__title">{hours.nextThreeHours.time}</p>
+                        <div className="next__weather">
+                            <div className="next__data">
+                                {hours.nextThreeHours.temperature} <br />
+                                {hours.nextThreeHours.pressure} <br />
+                            </div>
+                            <div className={"next__icon " + this.translateWeatherStatus(hours.nextThreeHours.weather)[0]}></div>
+                            <div className="next__weather-name">
+                                {this.translateWeatherStatus(hours.nextThreeHours.weather)[1]}
+                            </div>
+                        </div>
+                        <p className="next__title">{hours.nextSixHours.time}</p>
+                        <div className="next__weather">
+                            <div className="next__data">
+                                {hours.nextSixHours.temperature} <br />
+                                {hours.nextSixHours.pressure} <br />
+                            </div>
+                            <div className={"next__icon " + this.translateWeatherStatus(hours.nextSixHours.weather)[0]}></div>
+                            <div className="next__weather-name">
+                                {this.translateWeatherStatus(hours.nextSixHours.weather)[1]}
+                            </div>
+                        </div>
+                        <p className="next__title">{hours.nextNineHours.time}</p>
+                        <div className="next__weather">
+                            <div className="next__data">
+                                {hours.nextNineHours.temperature} <br />
+                                {hours.nextNineHours.pressure} <br />
+                            </div>
+                            <div className={"next__icon " + this.translateWeatherStatus(hours.nextNineHours.weather)[0]}></div>
+                            <div className="next__weather-name">
+                                {this.translateWeatherStatus(hours.nextNineHours.weather)[1]}
+                            </div>
+                        </div>
                     </aside>
                 </div>
             </section>

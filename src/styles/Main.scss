@@ -4,16 +4,17 @@
         display: flex;
         justify-content: space-between;
     }
-    &__next-days.next-days {
+    &__next.next {
         flex-basis: 28%;
         background-color: #fff;
     }
-    .next-days {
+    .next {
         &__title {
             background-color: #f9f9f9;
             width: 100%;
             padding: 15px;
             font-weight: 700;
+            text-align: center;
             margin-bottom: 20px;
         }
         &__weather {
