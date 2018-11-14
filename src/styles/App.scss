@@ -2,6 +2,7 @@
 @import "Footer";
 @import "Main";
 @import "Icons";
+@import "Info";
 
 $themeColor: #eeeeee;
 $breakPoint1: 1180px;
@@ -58,14 +59,18 @@ body {
     border: 0;
     font-size: 0.7em;
     cursor: pointer;
+    transition: 0.3s all;
 }
-
 .button { 
     &--search {
     color: #333;
     background-color: #eeeeee;
     padding: 16px 25px;
     font-size: 1em;
+    }
+    &--search:hover { 
+        background-color: #333;
+        color: #eeeeee
     }
 }
 

@@ -6,6 +6,7 @@ $breakPoint2: 1050px;
     .container {
         display: flex;
         justify-content: space-between;
+        align-items: center; 
     }
     &__logo {
         flex-basis: 33%;

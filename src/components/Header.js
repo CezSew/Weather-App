@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchForm from '../components/SearchForm';
+import Info from '../components/Info';
 
 export default class Header extends React.Component {
     render() {
@@ -15,7 +16,7 @@ export default class Header extends React.Component {
                         animateDataBoxes={this.props.animateDataBoxes}
                         handleSearch={this.props.handleSearch} 
                         listOfCities={this.props.listOfCities} />
-                        <div className="header__information information"></div>
+                        <Info />
                     </div>
                 </header>
             );
