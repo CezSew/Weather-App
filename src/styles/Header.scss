@@ -1,13 +1,19 @@
 $breakPoint1: 1180px;
 $breakPoint2: 1050px;
+$breakPoint3: 900px;
 
 .header {
     padding-top: 80px;
+    height: 240px;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
     .container {
         display: flex;
         justify-content: space-between;
         align-items: center; 
     }
+    
     &__logo {
         flex-basis: 33%;
     }
@@ -54,3 +60,18 @@ $breakPoint2: 1050px;
     }
 }
 
+@media (max-width: $breakPoint3) {
+    .header .container {
+        flex-direction: column;
+    }
+    .header__title.title {
+        margin-bottom: 30px;
+    }
+    .header__information.information {
+        display: none;
+    }
+    .header {
+        height: auto;
+        padding-bottom: 84px;
+    }
+}

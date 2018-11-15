@@ -100,3 +100,33 @@
         }
     }
 }
+
+@media(max-width: 900px) {
+    .weather-data .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .weather-data {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .weather-data__current {
+        order: 1;
+        margin-bottom: 20px;
+        width: 100%;
+        flex-basis: 100%;
+    }
+    .weather-data__next.next {
+        order: 2;
+        margin-bottom: 20px;
+        flex-basis: 50%;
+        flex-basis: calc(50% - 10px);
+    }
+    .weather-data__next-hours {
+        order: 2;
+        margin-bottom: 20px;
+        flex-basis: 50%;
+        flex-basis: calc(50% - 10px);
+    }
+}
